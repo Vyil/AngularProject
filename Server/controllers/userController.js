@@ -51,7 +51,39 @@ module.exports ={
                 res.status(400).send(new errorModel(400,'Error occured: '+err));
                 return;
             })
+        }        
+    },
+
+    editUser(req,res){
+        console.log('editUser called');
+        let idUrl = req.params.id;
+        let firstname=req.body.firstName;
+        let lastname=req.body.lastName;
+        let username=req.body.userName;
+
+        if(req.body.gold){
+            res.status(403).send(new errorModel(403,'You are not allowed to edit gold'));
         }
-        
+
+        User.findOneAndUpdate({_id:idUrl},{firstName:firstname,lastName:lastname,userName:username})
+        .then(result=>{
+            res.status(200).send(new errorModel(200,'User updated'));
+        })
+        .catch(err=>{
+            res.status(500).send(new errorModel(500,'Something went wrong trying to update the user: '+err));
+        })
+    },
+
+    deleteUser(req,res){
+        console.log('deleteUser called');
+        let idUrl = req.params.id;
+
+        User.findOneAndRemove({_id:idUrl})
+        .then(result=>{
+            res.status(200).send(new errorModel(200,'User with ID: '+idUrl+' removed'));
+        })
+        .catch(err=>{
+            res.status(500).send(new errorModel(500,'Something went wrong trying to remove the user'));
+        })
     }
 }
