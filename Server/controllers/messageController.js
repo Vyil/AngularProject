@@ -21,5 +21,17 @@ module.exports = {
         .catch(err=>{
             res.status(500).send(new errorModel(500,'Something went wrong: '+err))
         })
+    },
+
+    deleteMessage(req,res){
+        console.log('DeleteMessage called');
+        Message.findOneAndRemove({_id:req.params.id})
+        .then(result=>{
+            result.remove()
+            res.status(200).send(new errorModel(200, 'Removed message: '+result))
+        })
+        .catch(err=>{
+            res.status(500).send(new errorModel(500,'Error occured: '+err))
+        })
     }
 }
