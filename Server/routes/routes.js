@@ -4,6 +4,7 @@ const routes = express.Router();
 //Route paths
 let user_routes = require('./user_routes');
 let champion_routes= require('./champion_routes');
+let message_routes = require('./message_routes');
 
 routes.get('/', function (req, res) {
     res.send('Start (end)point')
@@ -11,6 +12,7 @@ routes.get('/', function (req, res) {
 
 routes.use('/',user_routes);
 routes.use('/',champion_routes);
+routes.use('/',message_routes);
 
 //Catch 404's 
 routes.get('*', function (req, res) {

@@ -3,8 +3,12 @@ const Schema = mongoose.Schema;
 
 const MessageSchema = new Schema({
     author:{
-        type:Schema.Types.ObjectId,
-        ref:'user'
+        type:String,
+        required:[true,'Author is required']
+    },
+    recipient:{
+        type:String,
+        required:[true,'Recipient is required']
     },
     content:{
         type:String,
