@@ -23,7 +23,7 @@ const UserSchema = new Schema({
     }],
     messages:[{
         type:Schema.Types.ObjectId,
-        ref:''
+        ref:'message'
     }]
 });
 

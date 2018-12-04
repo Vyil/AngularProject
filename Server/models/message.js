@@ -9,11 +9,6 @@ const MessageSchema = new Schema({
     content:{
         type:String,
         required:[true,'Message content is required']
-    },
-    recipient:{
-        //optional?
-        type:Schema.Types.ObjectId,
-        ref:'user'
     }
 });
 

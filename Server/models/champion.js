@@ -7,10 +7,16 @@ const ChampionSchema = new Schema({
         required:[true,'Champion Name is required']
     },
     level:{
-        type:Number
+        type:Number,
+        default:1
     },
     quality:{
-        type:String
+        type:String,
+        default:'Bronze'
+    },
+    owner:{
+        type:Schema.Types.ObjectId,
+        ref:'user'
     }
 });
 
