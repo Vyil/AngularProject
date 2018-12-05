@@ -1,17 +1,31 @@
 const User = require('../models/user');
 const Champion = require('../models/champion');
 const errorModel = require('../models/errorModel');
+const auth = require('../authentication/authentication');
 
 module.exports = {
 
     createChampion(req,res){
         console.log('createChampions called');
         //TODO Assign to player
+        let token = req.get('Authorization')
+        let cleanToken = token.substr(7)
+        let cleanedName = auth.decodeToken(cleanToken).sub;
+
         const newChampion = new Champion(req.body,{});
-        newChampion.save()
-        .then(result=>{
-            res.status(200).json({message:"Created champion: "+result});
-        })
+
+        User.findOne({userName:cleanedName})
+        .then(rslt=>{
+            newChampion.owner = rslt;
+            rslt.champions.push(newChampion);
+            Promise.all([
+                rslt.save(),
+                newChampion.save()
+            ])            
+        })        
+        .then(
+            res.status(200).json({message:"Created champion "})
+        )
         .catch(err=>{
             res.status(500).send(new errorModel(500,'Something went wrong'));
         })
@@ -19,6 +33,9 @@ module.exports = {
 
     getChampion(req,res){
         console.log('getChampion called');
+        let token = req.get('Authorization')
+        let cleanToken = token.substr(7)
+        console.log(auth.decodeToken(cleanToken).sub+'<<Token')
         let idUrl = req.params.id;
 
         if(!idUrl){

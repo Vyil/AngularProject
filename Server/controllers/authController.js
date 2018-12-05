@@ -25,7 +25,12 @@ module.exports = {
         // })
         .then(result=>{
             if(result.password == password){
-                res.status(200).json({message:"Logged in"})
+                let token = auth.encodeToken(result.userName);
+                let resultObject = {
+                    "token":token,
+                    "Message:":"Succesful login for user: "+result.userName
+                }
+                res.status(200).json(resultObject)
             }else {
                 res.status(401).json({message:'Rejected'})
             }

@@ -66,6 +66,8 @@ module.exports ={
 
     editUser(req,res){
         console.log('editUser called');
+        let token = req.get('Authorization')
+
         let idUrl = req.params.id;
         let firstname=req.body.firstName;
         let lastname=req.body.lastName;

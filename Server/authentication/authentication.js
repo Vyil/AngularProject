@@ -21,8 +21,7 @@ function decodeToken(token, callback) {
         const now = moment().unix();
         if(now > payload.exp) {
             console.log('Token has expired');
-        } 
-        
+        }
         return payload
         
     } catch(error) {
