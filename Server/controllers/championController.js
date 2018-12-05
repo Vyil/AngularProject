@@ -7,7 +7,7 @@ module.exports = {
 
     createChampion(req,res){
         console.log('createChampions called');
-        //TODO Assign to player
+
         let token = req.get('Authorization')
         let cleanToken = token.substr(7)
         let cleanedName = auth.decodeToken(cleanToken).sub;
@@ -33,9 +33,7 @@ module.exports = {
 
     getChampion(req,res){
         console.log('getChampion called');
-        let token = req.get('Authorization')
-        let cleanToken = token.substr(7)
-        console.log(auth.decodeToken(cleanToken).sub+'<<Token')
+
         let idUrl = req.params.id;
 
         if(!idUrl){
