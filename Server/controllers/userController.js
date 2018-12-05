@@ -5,16 +5,26 @@ module.exports ={
 
     createNewUser(req,res){
         console.log('CreateNewUser called');
-        const newUser = new User(req.body,{});
-        newUser.save()
+        User.findOne({userName:req.body.userName})
         .then(result=>{
-            res.status(200).json({message:"Created user: "+result});
-            return;
+            if(result){
+                res.status(409).send(new errorModel(409,'Username already exists'))
+            } else {
+                const newUser = new User(req.body,{});
+                newUser.save()
+                .then(result=>{
+                    res.status(200).json({message:"Created user: "+result});
+                    return;
+                })
+                .catch(err=>{
+                    res.status(400).send(new errorModel(400,'Error occured: '+err));
+                    return;
+                });
+            }
         })
         .catch(err=>{
-            res.status(400).send(new errorModel(400,'Error occured: '+err));
-            return;
-        });
+            res.status(409).send(new errorModel(409,'Username already exists: '+err))
+        })        
     },
 
     getUser(req,res){
