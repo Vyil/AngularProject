@@ -59,5 +59,28 @@ module.exports = {
         .catch(err=>{
             res.status(500).send(new errorModel(500,'Error occured(User not authorized to remove this message): '+err))
         })
+    },
+
+    getMessage(req,res){
+        console.log('getMessage called')
+
+        let token = req.get('Authorization')
+        if(!token){
+            res.status(401).json(new errorModel(401, 'Not authorized, no valid token')).end();
+        }
+        let cleanToken = token.substr(7)
+        let cleanedName = auth.decodeToken(cleanToken).sub;
+
+        Message.find({recipient:req.params.id})
+        .then(result=>{
+            if(result){
+                res.status(200).json(result).end()
+            } else {
+                res.status(404).send(new errorModel(404,'Id not found')).end()
+            }
+        })
+        .catch(err=>{
+            res.status(500).send(new errorModel(500,'Error occured: '+err)).end()
+        })
     }
 }
