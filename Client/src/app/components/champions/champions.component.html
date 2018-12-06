@@ -1,3 +1,6 @@
-<h2>{{champion.name}} Details</h2>
-<div><span>id: </span>{{champion.id}}</div>
-<div><span>name: </span>{{champion.name}}</div>
+<h2>My Champions</h2>
+<ul class="champions">
+  <li *ngFor="let champ of champions">
+    <span class="badge">{{champ.id}}</span> {{champ.name}}
+  </li>
+</ul>

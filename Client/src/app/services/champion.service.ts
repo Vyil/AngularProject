@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Champion } from '../models/champion';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ChampionService {
   constructor(private http: HttpClient) { }
 
   //Methods
-  getAll(): String{
-    return 'TestGetAll'
+  getAll(): Observable<Champion[]>{
+    return this.http.get<Champion[]>(this.URL);
   }
 }

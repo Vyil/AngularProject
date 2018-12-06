@@ -33,7 +33,7 @@ module.exports = {
 
     getChampion(req,res){
         console.log('getChampion called');
-
+        
         let idUrl = req.params.id;
 
         if(!idUrl){

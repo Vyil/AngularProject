@@ -9,16 +9,17 @@ import { Champion } from '../../models/champion';
 })
 export class ChampionsComponent implements OnInit {
 
-  champion: Champion = {
-    id:'1234823fcn8934',
-    name:'Bolg',
-    level:2,
-    quality:'Bronze'
-  }
+  champions: Champion [];
 
-  constructor() { }
+  constructor(private champService: ChampionService) { }
 
   ngOnInit() {
+    this.getAllChampions()
+  }
+
+  getAllChampions(): void{
+    this.champService.getAll()
+    .subscribe(champions =>this.champions = champions);
   }
 
 }
