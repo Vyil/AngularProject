@@ -71,14 +71,17 @@ module.exports = {
         let cleanToken = token.substr(7)
         let cleanedName = auth.decodeToken(cleanToken).sub;
 
-        Message.find({recipient:req.params.id})
-        .then(result=>{
-            if(result){
-                res.status(200).json(result).end()
-            } else {
-                res.status(404).send(new errorModel(404,'Id not found')).end()
-            }
-        })
+        User.findOne({userName:cleanedName})
+        .then(rslt=>{
+            Message.find({recipient:rslt._id})
+            .then(result=>{
+                if(result){
+                    res.status(200).json(result).end()
+                } else {
+                    res.status(404).send(new errorModel(404,'Id not found')).end()
+                }
+            })
+        })        
         .catch(err=>{
             res.status(500).send(new errorModel(500,'Error occured: '+err)).end()
         })
