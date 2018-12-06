@@ -8,13 +8,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { ChampionsComponent } from './components/champions/champions.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChampionsComponent,
     DashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

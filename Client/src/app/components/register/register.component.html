@@ -1,0 +1,23 @@
+<p>REGISTER</p>
+
+<form (ngSubmit)="register()" #registerForm="ngForm">
+  <div class="form-group">
+    <label for="firstName">FirstName</label>
+    <input type="text" class="form-control" id="firstName" placeholder="firstName" [(ngModel)]="user.firstName" name="firstName">
+  </div>
+  <div class="form-group">
+    <label for="lastName">LastName</label>
+    <input type="text" class="form-control" id="lastName" placeholder="lastName" [(ngModel)]="user.lastName" name="lastName">
+  </div>
+  <div class="form-group">
+    <label for="userName">Username</label>
+    <input type="text" class="form-control" id="userName" placeholder="Username" [(ngModel)]="user.userName" name="userName">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="user.password" name="password">
+  </div>
+  <button class="btn btn-primary" type="submit">Register</button>
+</form>
+
+TODO: remove this: {{user.firstName}}

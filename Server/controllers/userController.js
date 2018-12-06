@@ -4,7 +4,7 @@ const errorModel = require('../models/errorModel');
 module.exports ={
 
     createNewUser(req,res){
-        console.log('CreateNewUser called');
+        console.log('CreateNewUser called: '+req.body);
         User.findOne({userName:req.body.userName})
         .then(result=>{
             if(result){
