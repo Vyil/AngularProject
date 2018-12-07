@@ -11,9 +11,10 @@ import { User } from '../models/user';
 
 export class UserService {
   private URL: string = 'http://localhost:3000/api/user';
-  private loginURL : string = 'http://localhost:3000/api/login';
 
   constructor(private http: HttpClient) { }
 
-
+  getAll(): Observable<User[]>{
+    return this.http.get<User[]>(this.URL);
+  }
 }

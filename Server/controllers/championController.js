@@ -39,6 +39,7 @@ module.exports = {
         if(!idUrl){
             Champion.find({})
             .then(result=>{
+                result.sort((a,b)=>{return b.level-a.level})
                 res.status(200).json(result);
             })
             .catch(err=>{

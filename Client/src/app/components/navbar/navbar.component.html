@@ -7,7 +7,7 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink='/dashboard'>Dashboard <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" routerLink='/highscores'>Highscores</a>
-      <a class="nav-item nav-link" routerLink='/home'>Players</a>
+      <a class="nav-item nav-link" routerLink='/players'>Players</a>
       <a *ngIf="!isLogged()" class="nav-item nav-link" routerLink='/login'>Login</a>
       <a *ngIf="isLogged()" class="nav-item nav-link" (click)="logOutUser()">Logout</a>
     </div>

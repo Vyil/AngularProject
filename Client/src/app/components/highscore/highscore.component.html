@@ -1,3 +1,6 @@
-<p>
-  highscore works!
-</p>
+<h2>Highscore list for champions!</h2>
+<ul>
+  <li *ngFor="let champ of champions">
+    <span>{{champ.name}}</span> <span> is level: {{champ.level}} and quality: {{champ.quality}}</span>
+  </li>
+</ul>
