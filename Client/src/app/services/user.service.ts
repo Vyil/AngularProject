@@ -4,9 +4,6 @@ import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../models/user';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -18,16 +15,5 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  //Methods
-  loginUser(user:User): any{
-    return this.http.post(this.loginURL, user);
-  }
 
-  registerUser(user:User):Observable<User>{
-    console.log('userservice registeruser '+JSON.stringify(user))
-    return this.http.post<User>(this.URL,user, httpOptions).pipe(
-      tap((user:User)=>console.log(user.id)),
-      catchError(this.registerUser)
-    )
-  }
 }
