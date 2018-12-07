@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(this.user).subscribe(response =>{
       console.log('Succes')
       localStorage.setItem('APITOKEN',response.token);
-      location.replace('/champions');
+      location.replace('/dashboard');
     },error=>{
       if(error){
         console.log(error);
