@@ -29,9 +29,10 @@ module.exports ={
 
     getUser(req,res){
         console.log('getUser called');
-        let idUrl = req.params.id;
-
-        if(!idUrl){
+        var query = req.query.userName;
+        console.log(query)
+        //Find all
+        if(!query){
             User.find({})
             .then(result=>{
                 if(result){
@@ -46,22 +47,30 @@ module.exports ={
                 res.status(400).errorModel(400,'Error occoured: '+error);
                 return;
             })
-        } else {
-            User.findOne({_id:idUrl})
-            .then(result=>{
-                if(!result){
-                    res.status(404).send(new errorModel(404,'User with given ID not found'));
-                    return;
-                } else{
-                    res.status(200).json(result);
-                    return;
-                }
-            })
-            .catch(err=>{
-                res.status(400).send(new errorModel(400,'Error occured: '+err));
+            //Find by query
+        } else if(req.query){
+            res.status(200).send(req.query)
+            return;
+        }  
+    },
+
+    getById(req,res){
+        let idUrl = req.params.id;
+
+        User.findOne({_id:idUrl})
+        .then(result=>{
+            if(!result){
+                res.status(404).send(new errorModel(404,'User with given ID not found'));
                 return;
-            })
-        }        
+            } else{
+                res.status(200).json(result);
+                return;
+            }
+        })
+        .catch(err=>{
+            res.status(400).send(new errorModel(400,'Error occured: '+err));
+            return;
+        })
     },
 
     editUser(req,res){
