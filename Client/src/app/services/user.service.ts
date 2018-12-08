@@ -15,10 +15,22 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<User[]>{
-    return this.http.get<User[]>(this.URL);
+    return this.http.get<User[]>(this.URL,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+      });
   }
 
   getSpecific(id:string): Observable<User>{
     return this.http.get<User>(this.URL+'/'+id)
+  }
+
+  getByName(): Observable<User>{
+    return this.http.get<User>(this.URL+'?getSelf=yes',{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    });
   }
 }

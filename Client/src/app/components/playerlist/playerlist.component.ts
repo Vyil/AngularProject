@@ -23,9 +23,7 @@ export class PlayerlistComponent implements OnInit {
   }
 
   onSelect(user:User):void{
-    console.log('clicked: '+ user.userName)
     this.router.navigate(['/players/'+user._id])
-    //location.replace('/players/'+user._id)
   }
 
 }
