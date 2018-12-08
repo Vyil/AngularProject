@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const errorModel = require('../models/errorModel');
+const auth = require('../authentication/authentication');
 
 module.exports ={
 
@@ -29,10 +30,16 @@ module.exports ={
 
     getUser(req,res){
         console.log('getUser called');
-        var query = req.query.userName;
-        console.log(query)
+        var queryParam = req.query.getSelf;
+        let token = req.get('Authorization')
+        if(!token){
+            res.status(401).json(new errorModel(401, 'Not authorized, no valid token'));
+            return;
+        }
+        let cleanToken = token.substr(7)
+        let cleanedName = auth.decodeToken(cleanToken).sub;
         //Find all
-        if(!query){
+        if(!queryParam){
             User.find({})
             .then(result=>{
                 if(result){
@@ -48,10 +55,21 @@ module.exports ={
                 return;
             })
             //Find by query
-        } else if(req.query){
-            res.status(200).send(req.query)
+        } else if(queryParam == 'yes'){
+            
+            User.findOne({userName:cleanedName})
+            .then(result=>{
+                res.status(200).json(result);
+                return;
+            })
+            .catch(err=>{
+                res.status(500).send(new errorModel(500,'Error occured: '+err))
+                return;
+            })
+        }else{
+            res.status(404).send(new errorModel(404,'Unknown request'));
             return;
-        }  
+        }
     },
 
     getById(req,res){
