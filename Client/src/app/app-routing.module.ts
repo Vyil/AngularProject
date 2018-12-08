@@ -7,6 +7,7 @@ import { AuthGuard } from './auth.guard';
 import { HighscoreComponent } from './components/highscore/highscore.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PlayerlistComponent } from './components/playerlist/playerlist.component';
+import { PlayerDetailComponent } from './components/player-detail/player-detail.component';
 
 const routes: Routes = [
   {path: 'highscores', component: HighscoreComponent, canActivate:[AuthGuard]},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register',component: RegisterComponent},
   {path: 'dashboard',component: DashboardComponent},
-  {path: 'players',component: PlayerlistComponent}
+  {path: 'players',component: PlayerlistComponent},
+  {path:'players/:_id',component:PlayerDetailComponent}
 ];
 
 @NgModule({

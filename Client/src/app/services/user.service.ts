@@ -17,4 +17,8 @@ export class UserService {
   getAll(): Observable<User[]>{
     return this.http.get<User[]>(this.URL);
   }
+
+  getSpecific(id:string): Observable<User>{
+    return this.http.get<User>(this.URL+'/'+id)
+  }
 }

@@ -9,7 +9,7 @@
       <a class="nav-item nav-link" routerLink='/highscores'>Highscores</a>
       <a class="nav-item nav-link" routerLink='/players'>Players</a>
       <a *ngIf="!isLogged()" class="nav-item nav-link" routerLink='/login'>Login</a>
-      <a *ngIf="isLogged()" class="nav-item nav-link" (click)="logOutUser()">Logout</a>
+      <a *ngIf="isLogged()" class="btn nav-item nav-link" (click)="logOutUser()">Logout</a>
     </div>
   </div>
 </nav>

@@ -31,7 +31,7 @@ export class AuthService {
   
     registerUser(user:User):Observable<User>{
       return this.http.post<User>(this.URL,user).pipe(
-        tap((user:User)=>console.log(user.id)),
+        tap((user:User)=>console.log(user._id)),
         catchError(this.registerUser)
       )
     }
