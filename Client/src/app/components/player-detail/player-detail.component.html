@@ -1,3 +1,12 @@
 <div *ngIf="user">
-  <h2>sup: {{user.userName}}</h2>
+  <h2>Player profile: {{user.userName}}</h2>
+</div>
+
+<div *ngIf="champions">
+  <h3>Champions:</h3>
+  <ul>
+    <li *ngFor="let champ of champions">
+      <span>{{champ.name}}</span>
+    </li>
+  </ul>
 </div>

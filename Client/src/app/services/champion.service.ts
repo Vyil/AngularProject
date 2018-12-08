@@ -15,4 +15,8 @@ export class ChampionService {
   getAll(): Observable<Champion[]>{
     return this.http.get<Champion[]>(this.URL);
   }
+
+  getPlayerChampions(id): Observable<Champion[]>{
+    return this.http.get<Champion[]>(this.URL+'/user/'+id);
+  }
 }

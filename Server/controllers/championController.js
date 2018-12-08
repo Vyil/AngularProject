@@ -56,6 +56,22 @@ module.exports = {
         }
     },
 
+    getPlayerChampions(req,res){
+        let idUrl = req.params.id;
+        Champion.find({owner:idUrl})
+        .then(result=>{
+            if(result){
+                res.status(200).json(result);
+            } else {
+                res.status(404).send(new errorModel(404,'No champions found for user'));
+            }
+            
+        })
+        .catch(err=>{
+            res.status(500).send(new errorModel(500,'Error occured: '+err));
+        })
+    },
+
     tradeChampion(req,res){
         //TODO
     }
