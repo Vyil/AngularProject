@@ -10,3 +10,12 @@
     </li>
   </ul>
 </div>
+
+<div *ngIf="messages">
+    <h3>Messages:</h3>
+    <ul>
+      <li *ngFor="let message of messages">
+        <span>{{message.content}}</span>
+      </li>
+    </ul>
+</div>
