@@ -3,6 +3,8 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { MessageService } from 'src/app/services/message.service';
 import { Message } from 'src/app/models/message';
+import { Champion } from 'src/app/models/champion';
+import { ChampionService } from 'src/app/services/champion.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,15 +15,18 @@ export class DashboardComponent implements OnInit {
 
   user:User;
   messages:Message[];
+  champions:Champion[];
 
   constructor(
     private userService:UserService,
-    private messageService:MessageService
+    private messageService:MessageService,
+    private champService: ChampionService
   ) { }
 
   ngOnInit() {
     this.getByName();
     this.getMessageByName();
+    this.getChampions();
   }
 
   getByName(){
@@ -32,6 +37,11 @@ export class DashboardComponent implements OnInit {
   getMessageByName(){
     this.messageService.getMessageByName().subscribe(
       messages=>this.messages= messages);
+  }
+
+  getChampions(){
+    this.champService.getPlayerChampionsDashboard().subscribe(
+      champions=>this.champions=champions);
   }
 
 }

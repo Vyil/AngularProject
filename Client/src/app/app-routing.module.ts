@@ -10,13 +10,13 @@ import { PlayerlistComponent } from './components/playerlist/playerlist.componen
 import { PlayerDetailComponent } from './components/player-detail/player-detail.component';
 
 const routes: Routes = [
-  {path: 'highscores', component: HighscoreComponent, canActivate:[AuthGuard]},
+  {path: 'highscores', component: HighscoreComponent},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register',component: RegisterComponent},
-  {path: 'dashboard',component: DashboardComponent},
+  {path: 'dashboard',component: DashboardComponent, canActivate:[AuthGuard]},
   {path: 'players',component: PlayerlistComponent},
-  {path:'players/:_id',component:PlayerDetailComponent}
+  {path:'players/:_id',component:PlayerDetailComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({

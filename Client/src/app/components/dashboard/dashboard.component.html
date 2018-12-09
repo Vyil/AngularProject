@@ -10,3 +10,16 @@
       </li>
     </ul>
 </div>
+
+<div *ngIf="champions">
+  <h3>Your champions: </h3>
+  <ul>
+      <li *ngFor="let champ of champions">
+        <span>{{champ.name}}</span>
+      </li>
+    </ul>
+  <div *ngIf="champions.length < 5">
+    <p>You seem to lack champions</p>
+  </div>
+
+</div>

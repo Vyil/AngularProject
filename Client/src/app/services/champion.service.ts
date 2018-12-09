@@ -13,10 +13,26 @@ export class ChampionService {
 
   //Methods
   getAll(): Observable<Champion[]>{
-    return this.http.get<Champion[]>(this.URL);
+    return this.http.get<Champion[]>(this.URL,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    });
   }
 
   getPlayerChampions(id): Observable<Champion[]>{
-    return this.http.get<Champion[]>(this.URL+'/user/'+id);
+    return this.http.get<Champion[]>(this.URL+'/user/'+id,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    });
+  }
+
+  getPlayerChampionsDashboard():Observable<Champion[]>{
+    return this.http.get<Champion[]>(this.URL,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    });
   }
 }

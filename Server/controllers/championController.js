@@ -58,18 +58,44 @@ module.exports = {
 
     getPlayerChampions(req,res){
         let idUrl = req.params.id;
-        Champion.find({owner:idUrl})
-        .then(result=>{
-            if(result){
-                res.status(200).json(result);
-            } else {
-                res.status(404).send(new errorModel(404,'No champions found for user'));
-            }
-            
-        })
-        .catch(err=>{
-            res.status(500).send(new errorModel(500,'Error occured: '+err));
-        })
+        let token = req.get('Authorization')
+        if(!token){
+            res.status(401).json(new errorModel(401, 'Not authorized, no valid token'));
+            return;
+        }
+        let cleanToken = token.substr(7)
+        let cleanedName = auth.decodeToken(cleanToken).sub;
+        if(!idUrl){
+            User.findOne({userName:cleanedName})
+            .then(rslt=>{
+                Champion.find({owner:rslt.userName})
+                .then(result=>{
+                    res.status(200).json(result)
+                    return;
+                })
+                .catch(err=>{
+                    res.status(500).send(new errorModel(500,'Error occured: '+err))
+                    return;
+                })
+            })
+            .catch(error=>{
+                res.status(500).send(new errorModel(500,'Error occured: '+error))
+                return;
+            })
+        } else {
+            Champion.find({owner:idUrl})
+            .then(result=>{
+                if(result){
+                    res.status(200).json(result);
+                } else {
+                    res.status(404).send(new errorModel(404,'No champions found for user'));
+                }
+                
+            })
+            .catch(err=>{
+                res.status(500).send(new errorModel(500,'Error occured: '+err));
+            })
+        }        
     },
 
     tradeChampion(req,res){

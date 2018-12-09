@@ -32,12 +32,7 @@ module.exports ={
         console.log('getUser called');
         var queryParam = req.query.getSelf;
         let token = req.get('Authorization')
-        if(!token){
-            res.status(401).json(new errorModel(401, 'Not authorized, no valid token'));
-            return;
-        }
-        let cleanToken = token.substr(7)
-        let cleanedName = auth.decodeToken(cleanToken).sub;
+                
         //Find all
         if(!queryParam){
             User.find({})
@@ -56,7 +51,12 @@ module.exports ={
             })
             //Find by query
         } else if(queryParam == 'yes'){
-            
+            if(!token){
+                res.status(401).json(new errorModel(401, 'Not authorized, no valid token'));
+                return;
+            }
+            let cleanToken = token.substr(7)
+            let cleanedName = auth.decodeToken(cleanToken).sub;
             User.findOne({userName:cleanedName})
             .then(result=>{
                 res.status(200).json(result);
