@@ -63,6 +63,7 @@ module.exports = {
 
     getMessage(req,res){
         console.log('getMessage called')
+        var queryParam = req.query.id;
 
         let token = req.get('Authorization')
         if(!token){
@@ -71,19 +72,33 @@ module.exports = {
         let cleanToken = token.substr(7)
         let cleanedName = auth.decodeToken(cleanToken).sub;
 
-        User.findOne({userName:cleanedName})
-        .then(rslt=>{
-            Message.find({recipient:rslt._id})
-            .then(result=>{
-                if(result){
-                    res.status(200).json(result).end()
-                } else {
-                    res.status(404).send(new errorModel(404,'Id not found')).end()
-                }
+        if(!queryParam){
+            console.log('no query param')
+            User.findOne({userName:cleanedName})
+            .then(rslt=>{
+                Message.find({recipient:rslt._id})
+                .then(result=>{
+                    if(result){
+                        res.status(200).json(result).end()
+                    } else {
+                        res.status(404).send(new errorModel(404,'Id not found')).end()
+                    }
+                })
+            })        
+            .catch(err=>{
+                res.status(500).send(new errorModel(500,'Error occured: '+err)).end()
             })
-        })        
-        .catch(err=>{
-            res.status(500).send(new errorModel(500,'Error occured: '+err)).end()
-        })
+        } else {
+            console.log('query param')
+            Message.find({recipient:queryParam})
+            .then(result=>{
+                res.status(200).json(result)
+                return;
+            })
+            .catch(err=>{
+                res.status(500).send(new errorModel(500,'Error occured (no results for given ID?): '+err))
+                return;
+            })
+        }        
     }
 }

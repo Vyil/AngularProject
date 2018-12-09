@@ -7,8 +7,8 @@ const MessageSchema = new Schema({
         required:[true,'Author is required']
     },
     recipient:{
-        type:String,
-        required:[true,'Recipient is required']
+        type:Schema.Types.ObjectId,
+        ref:'user'
     },
     content:{
         type:String,
