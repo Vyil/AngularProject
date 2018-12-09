@@ -19,3 +19,14 @@
       </li>
     </ul>
 </div>
+<div *ngIf="champions">
+  <div *ngIf="champions.length < 5">
+      <p>You seem to lack champions, you can have a total of five!</p>
+      <div>
+          <label>Give your new champion a name!:
+            <input [(ngModel)]="newChampion.name">
+            <a class="btn btn-primary" (click)="addChampion()">Add new champion</a>
+          </label>
+        </div>
+  </div>  
+</div>

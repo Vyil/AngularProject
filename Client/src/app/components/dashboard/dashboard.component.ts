@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   user:User;
   messages:Message[];
   champions:Champion[];
+  newChampion:Champion;
 
   constructor(
     private userService:UserService,
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
     this.getByName();
     this.getMessageByName();
     this.getChampions();
+    this.newChampion = new Champion();
   }
 
   getByName(){
@@ -42,6 +44,12 @@ export class DashboardComponent implements OnInit {
   getChampions(){
     this.champService.getPlayerChampionsDashboard().subscribe(
       champions=>this.champions=champions);
+  }
+
+  addChampion(){
+    console.log('Added: '+this.newChampion.name)
+    this.champService.createNewChampions(this.newChampion).subscribe();
+    location.reload();
   }
 
 }

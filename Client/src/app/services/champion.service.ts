@@ -35,4 +35,12 @@ export class ChampionService {
       }
     });
   }
+
+  createNewChampions(champion:Champion): Observable<Champion>{
+    return this.http.post<Champion>(this.URL,champion,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    });
+  }
 }
