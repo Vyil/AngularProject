@@ -29,7 +29,7 @@ export class ChampionService {
   }
 
   getPlayerChampionsDashboard():Observable<Champion[]>{
-    return this.http.get<Champion[]>(this.URL,{
+    return this.http.get<Champion[]>(this.URL+'?getByToken=yes',{
       headers:{
         'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
       }
