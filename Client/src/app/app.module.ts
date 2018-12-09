@@ -14,6 +14,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HighscoreComponent } from './components/highscore/highscore.component';
 import { PlayerlistComponent } from './components/playerlist/playerlist.component';
 import { PlayerDetailComponent } from './components/player-detail/player-detail.component';
+import { MessageComponent } from './components/message/message.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PlayerDetailComponent } from './components/player-detail/player-detail.
     RegisterComponent,
     HighscoreComponent,
     PlayerlistComponent,
-    PlayerDetailComponent
+    PlayerDetailComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

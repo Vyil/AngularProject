@@ -26,4 +26,12 @@ export class MessageService {
       }
     });
   }
+
+  submitMessage(message:Message){
+    return this.http.post<Message>(this.URL,message,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    })
+  }
 }
