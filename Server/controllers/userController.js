@@ -96,15 +96,13 @@ module.exports ={
         let token = req.get('Authorization')
 
         let idUrl = req.params.id;
-        let firstname=req.body.firstName;
-        let lastname=req.body.lastName;
         let username=req.body.userName;
 
         if(req.body.gold){
             res.status(403).send(new errorModel(403,'You are not allowed to edit gold'));
         }
 
-        User.findOneAndUpdate({_id:idUrl},{firstName:firstname,lastName:lastname,userName:username})
+        User.findOneAndUpdate({_id:idUrl},{userName:username})
         .then(result=>{
             res.status(200).send(new errorModel(200,'User updated'));
         })

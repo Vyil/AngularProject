@@ -1,0 +1,14 @@
+<form>
+  <div class="form-group">
+    <label for="userName">Username <br>(if you don't want to change the username leave it blank)</label>
+    <input type="text" class="form-control" id="userName" [(ngModel)]="user.userName" name="userName">
+    <button class="myButton" (click)="editUserName()">Edit</button>
+  </div>
+
+  <div class="form-group">
+      <label for="password">Password <br>(if you don't want to change the password leave it blank)</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password">
+    </div>
+    <button class="myButton" (click)="editUserPassword()">Edit</button>
+</form>
+

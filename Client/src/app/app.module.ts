@@ -15,6 +15,9 @@ import { HighscoreComponent } from './components/highscore/highscore.component';
 import { PlayerlistComponent } from './components/playerlist/playerlist.component';
 import { PlayerDetailComponent } from './components/player-detail/player-detail.component';
 import { MessageComponent } from './components/message/message.component';
+import { MatDialogModule,MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditdialogComponent } from './components/editdialog/editdialog.component';
 
 @NgModule({
   declarations: [
@@ -28,13 +31,21 @@ import { MessageComponent } from './components/message/message.component';
     HighscoreComponent,
     PlayerlistComponent,
     PlayerDetailComponent,
-    MessageComponent
+    MessageComponent,    
+    EditdialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule
+  ],
+  entryComponents:[
+    EditdialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

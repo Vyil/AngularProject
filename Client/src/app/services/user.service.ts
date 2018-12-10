@@ -33,4 +33,12 @@ export class UserService {
       }
     });
   }
+
+  editUserName(id:string,user:User):Observable<User>{
+    return this.http.put<User>(this.URL+'/'+id+'?edit=name',user,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    });
+  }
 }

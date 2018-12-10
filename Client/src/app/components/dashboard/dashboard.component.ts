@@ -5,6 +5,8 @@ import { MessageService } from 'src/app/services/message.service';
 import { Message } from 'src/app/models/message';
 import { Champion } from 'src/app/models/champion';
 import { ChampionService } from 'src/app/services/champion.service';
+import { MatDialog } from '@angular/material';
+import { EditdialogComponent } from '../editdialog/editdialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +24,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private userService:UserService,
     private messageService:MessageService,
-    private champService: ChampionService
+    private champService: ChampionService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -72,6 +75,17 @@ export class DashboardComponent implements OnInit {
   deleteMessage(id:string){
     this.messageService.deleteMessage(id).subscribe();
     //location.reload();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EditdialogComponent, {
+      width: '500px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

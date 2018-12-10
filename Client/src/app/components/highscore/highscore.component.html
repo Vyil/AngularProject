@@ -12,10 +12,11 @@
     <tbody>
         <div *ngFor="let champ of champions">
       <tr>
+        <th scope="row"></th>
         <td>{{champ.name}}</td>
         <td>{{champ.level}}</td>
         <td>{{champ.quality}}</td>
-        <td><a class="btn btn-primary" (click)="getOwner(champ.owner)">owner</a></td>
+        <td><a class="button1" (click)="getOwner(champ.owner)">owner</a></td>
       </tr>
     </div>
     </tbody>
