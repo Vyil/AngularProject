@@ -1,5 +1,5 @@
 <div *ngIf="user">
-  <p>Welcome {{user.userName}}</p>
+  <p>Welcome {{user.userName}}, you have {{user.gold}} gold coins!</p>
 </div>
 
 <div *ngIf="messages">
@@ -20,9 +20,11 @@
               <h5 class="card-title">{{champ.name}}</h5>
               <p class="card-text">Level: {{champ.level}}</p>
               <p class="card-text">Quality: {{champ.quality}}</p>
-              <div class="row">
-                  <a class="btn btn-primary col-sm">Level up!</a>
-                  <a class="btn btn-primary col-sm">Upgrade quality!</a>
+              <div *ngIf="userGold" class="row">
+                  <a *ngIf="userGold >=200"class="btn btn-primary col-sm" (click)="upgradeLevel(champ._id)">Level up!(200G)</a>
+                  <a *ngIf="userGold <200" >You need more gold to level up!</a>
+                  <a *ngIf="userGold >= 500"class="btn btn-primary col-sm">Upgrade quality!(500G)</a>
+                  <a *ngIf="userGold <500" >You need more gold to increase quality!</a>
               </div>              
             </div>
           </div>

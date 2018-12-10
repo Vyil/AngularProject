@@ -124,5 +124,13 @@ module.exports ={
         .catch(err=>{
             res.status(500).send(new errorModel(500,'Something went wrong trying to remove the user'));
         })
+    },
+
+    addGold(req,res){
+        let token = req.get('Authorization')
+        let cleanToken = token.substr(7)
+        let cleanedName = auth.decodeToken(cleanToken).sub;
+        User.findOneAndUpdate({userName:cleanedName},{$inc:{gold:200}})
+        .then(res.status(200).send('succes'))
     }
 }

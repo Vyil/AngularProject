@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   messages:Message[];
   champions:Champion[];
   newChampion:Champion;
+  userGold: Number;
 
   constructor(
     private userService:UserService,
@@ -28,12 +29,14 @@ export class DashboardComponent implements OnInit {
     this.getByName();
     this.getMessageByName();
     this.getChampions();
+    this.addGold();
     this.newChampion = new Champion();
   }
 
   getByName(){
     this.userService.getByName().subscribe(
       user=>this.user = user);
+      
   }
 
   getMessageByName(){
@@ -50,6 +53,15 @@ export class DashboardComponent implements OnInit {
     console.log('Added: '+this.newChampion.name)
     this.champService.createNewChampions(this.newChampion).subscribe();
     location.reload();
+  }
+
+  upgradeLevel(id:string){
+    this.champService.upgradeChampionLevel(id).subscribe();
+    location.reload();
+  }
+  addGold(){
+    this.userService.getByName().subscribe(
+      res=>this.userGold=res.gold);
   }
 
 }

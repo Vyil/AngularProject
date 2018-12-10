@@ -140,16 +140,28 @@ module.exports = {
         let cleanToken = token.substr(7)
         let cleanedName = auth.decodeToken(cleanToken).sub;
 
+
         if(queryParam=='level'){
-            Champion.findOneAndUpdate({_id:idUrl},{$inc:{level:1}})
-            .then(result=>{
-                res.status(200).send('Champion level upgraded!')
-                return;
+            User.findOne({userName:cleanedName})
+            .then(rslt=>{
+                if(rslt.gold>=200){
+                    Champion.findOneAndUpdate({_id:idUrl},{$inc:{level:1}})
+                    .then(result=>{
+                        rslt.gold -=200;
+                        rslt.save();
+                        res.status(200).send('Champion level upgraded!')
+                        return;
+                    })
+                    .catch(err=>{
+                        res.status(500).send(new errorModel(500,'Error occured: '+err))
+                        return;
+                    })
+                } else {
+                    res.status(400).send(new errorModel(400,'You do not have enough gold!'))
+                    return;
+                }
             })
-            .catch(err=>{
-                res.status(500).send(new errorModel(500,'Error occured: '+err))
-                return;
-            })
+           
         } else if(queryParam=='quality'){
             Champion.findOne({_id:idUrl})
             .then(result=>{

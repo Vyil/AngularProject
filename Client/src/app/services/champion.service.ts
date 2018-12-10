@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Champion } from '../models/champion';
 
@@ -38,6 +38,14 @@ export class ChampionService {
 
   createNewChampions(champion:Champion): Observable<Champion>{
     return this.http.post<Champion>(this.URL,champion,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    });
+  }
+
+  upgradeChampionLevel(id:string):Observable<Champion>{
+    return this.http.put<Champion>(this.URL+'/'+id+'?upgrade=level',null,{
       headers:{
         'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
       }
