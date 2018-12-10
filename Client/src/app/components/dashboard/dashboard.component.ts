@@ -69,4 +69,9 @@ export class DashboardComponent implements OnInit {
       res=>this.userGold=res.gold);
   }
 
+  deleteMessage(id:string){
+    this.messageService.deleteMessage(id).subscribe();
+    //location.reload();
+  }
+
 }

@@ -32,6 +32,14 @@ export class MessageService {
       headers:{
         'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
       }
-    })
+    });
+  }
+
+  deleteMessage(id:string){
+    return this.http.delete<Message>(this.URL+'/'+id,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    });
   }
 }

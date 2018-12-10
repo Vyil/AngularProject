@@ -67,10 +67,8 @@ module.exports = {
                 let cleanedName = auth.decodeToken(cleanToken).sub;
                 User.findOne({userName: cleanedName})
                     .then(rslt => {
-                        console.log(rslt+'<<<<')
                         Champion.find({owner: rslt._id})
                             .then(result => {
-                                console.log(result)
                                 res.status(200).json(result)
                                 return;
                             })
@@ -165,7 +163,6 @@ module.exports = {
         } else if(queryParam=='quality'){
             Champion.findOne({_id:idUrl})
             .then(result=>{
-                console.log(result+'<<<<');
                 if(result.quality == 'Bronze'){
                     result.quality = 'Silver'
                     result.save()

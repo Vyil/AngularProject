@@ -41,16 +41,25 @@ module.exports = {
         Message.findOne({_id:req.params.id})
         .then(result=>{
             if(result){
-                User.findOne({userName:cleanedName})
+                User.findOne({userName:cleanedName})                
                 .then(rcpnt=>{
-                    if(result.recipient == rcpnt._id || result.author == cleanedName){
+                    if(result.recipient.toString() == rcpnt._id.toString()){
                         result.remove()
                         res.status(200).send(new errorModel(200, 'Removed message: '+result))
-                    } else {
+                        return;
+                    } else if(result.author == cleanedName){
+                        result.remove()
+                        res.status(200).send(new errorModel(200, 'Removed message: '+result))
+                        return;
+                    } else{
                         res.status(401).send(new errorModel(401, 'Not authorized, no valid token'))
                         return;
                     }
-                })   
+                })
+                .catch(err=>{
+                    res.status(500).json(err)
+                    return;
+                })
             } else {
                 res.status(404).send(new errorModel(404,'No message found with given ID')).end();
             }
