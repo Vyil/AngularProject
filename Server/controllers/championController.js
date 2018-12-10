@@ -126,5 +126,69 @@ module.exports = {
 
     tradeChampion(req, res) {
         //TODO
+    },
+
+    upgradeChampion(req,res){
+        console.log('Upgrade champion called')
+        let idUrl = req.params.id;
+        let token = req.get('Authorization')
+        var queryParam = req.query.upgrade;
+        if (!token) {
+            res.status(401).json(new errorModel(401, 'Not authorized, no valid token'));
+            return;
+        }
+        let cleanToken = token.substr(7)
+        let cleanedName = auth.decodeToken(cleanToken).sub;
+
+        if(queryParam=='level'){
+            Champion.findOneAndUpdate({_id:idUrl},{$inc:{level:1}})
+            .then(result=>{
+                res.status(200).send('Champion level upgraded!')
+                return;
+            })
+            .catch(err=>{
+                res.status(500).send(new errorModel(500,'Error occured: '+err))
+                return;
+            })
+        } else if(queryParam=='quality'){
+            Champion.findOne({_id:idUrl})
+            .then(result=>{
+                console.log(result+'<<<<');
+                if(result.quality == 'Bronze'){
+                    result.quality = 'Silver'
+                    result.save()
+                    .then(
+                        res.status(200).send('Quality upgraded').end()                        
+                    )
+                    .catch(err=>{
+                        res.status(500).send(new errorModel(500,'Error occured: '+err))
+                        return
+                    })
+                } else if(result.quality =='Silver'){
+                    result.quality = 'Gold'
+                    result.save()
+                    .then(
+                        res.status(200).send('Quality upgraded').end()                        
+                    )
+                    .catch(err=>{
+                        res.status(500).send(new errorModel(500,'Error occured: '+err))
+                        return
+                    })
+                } else if(result.quality =='Gold'){
+                    result.quality = 'Diamond'
+                    result.save()
+                    .then(
+                        res.status(200).send('Quality upgraded').end()                        
+                    )
+                    .catch(err=>{
+                        res.status(500).send(new errorModel(500,'Error occured: '+err))
+                        return
+                    })
+                } else {
+                    res.status(400).send(new errorModel(400,'Calm down, champion has highest quality already!'))
+                    return;
+                }
+            })
+        }
     }
 }

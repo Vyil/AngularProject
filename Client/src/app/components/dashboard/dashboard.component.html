@@ -13,12 +13,23 @@
 
 <div *ngIf="champions">
   <h3>Your champions: </h3>
-  <ul>
-      <li *ngFor="let champ of champions">
-        <span>{{champ.name}}</span>
-      </li>
-    </ul>
-</div>
+  <div class="row">
+      <div *ngFor="let champ of champions">
+          <div class="card col-sm" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{champ.name}}</h5>
+              <p class="card-text">Level: {{champ.level}}</p>
+              <p class="card-text">Quality: {{champ.quality}}</p>
+              <div class="row">
+                  <a class="btn btn-primary col-sm">Level up!</a>
+                  <a class="btn btn-primary col-sm">Upgrade quality!</a>
+              </div>              
+            </div>
+          </div>
+        </div>
+  </div>
+
+
 <div *ngIf="champions">
   <div *ngIf="champions.length < 5">
       <p>You seem to lack champions, you can have a total of five!</p>

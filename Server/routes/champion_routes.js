@@ -7,5 +7,6 @@ const championController = require('../controllers/championController');
 router.post('/champion', championController.createChampion);
 router.get('/champion/:id?',championController.getChampion);
 router.get('/champion/user/:id?',championController.getPlayerChampions);
+router.put('/champion/:id',championController.upgradeChampion);
 
 module.exports = router;
