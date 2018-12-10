@@ -51,4 +51,12 @@ export class ChampionService {
       }
     });
   }
+
+  upgradeChampionQuality(id:string):Observable<Champion>{
+    return this.http.put<Champion>(this.URL+'/'+id+'?upgrade=quality',null,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    });
+  }
 }

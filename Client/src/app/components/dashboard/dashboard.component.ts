@@ -59,6 +59,11 @@ export class DashboardComponent implements OnInit {
     this.champService.upgradeChampionLevel(id).subscribe();
     location.reload();
   }
+
+  upgradeQuality(id:string){
+    this.champService.upgradeChampionQuality(id).subscribe();
+    location.reload();
+  }
   addGold(){
     this.userService.getByName().subscribe(
       res=>this.userGold=res.gold);

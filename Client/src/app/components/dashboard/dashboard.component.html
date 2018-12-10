@@ -23,7 +23,7 @@
               <div *ngIf="userGold" class="row">
                   <a *ngIf="userGold >=200"class="btn btn-primary col-sm" (click)="upgradeLevel(champ._id)">Level up!(200G)</a>
                   <a *ngIf="userGold <200" >You need more gold to level up!</a>
-                  <a *ngIf="userGold >= 500"class="btn btn-primary col-sm">Upgrade quality!(500G)</a>
+                  <a *ngIf="userGold >= 500"class="btn btn-primary col-sm" (click)="upgradeQuality(champ._id)">Upgrade quality!(500G)</a>
                   <a *ngIf="userGold <500" >You need more gold to increase quality!</a>
               </div>              
             </div>
