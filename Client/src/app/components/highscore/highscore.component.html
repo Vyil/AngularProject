@@ -1,6 +1,23 @@
 <h2>Highscore list for champions!</h2>
-<ul>
-  <li *ngFor="let champ of champions">
-    <span>{{champ.name}}</span> <span> is level: {{champ.level}} and quality: {{champ.quality}}</span>
-  </li>
-</ul>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Level</th>
+        <th scope="col">Quality</th>
+        <th scope="col">Owned by</th>
+      </tr>
+    </thead>
+    <tbody>
+        <div *ngFor="let champ of champions">
+      <tr>
+        <td>{{champ.name}}</td>
+        <td>{{champ.level}}</td>
+        <td>{{champ.quality}}</td>
+        <td><a class="btn btn-primary" (click)="getOwner(champ.owner)">owner</a></td>
+      </tr>
+    </div>
+    </tbody>
+  </table>
+
