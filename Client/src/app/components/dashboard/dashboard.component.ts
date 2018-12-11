@@ -23,7 +23,6 @@ export class DashboardComponent implements OnInit{
 messages:Message[];
   champions:Champion[];
   newChampion:Champion;
-  userGold: Number;
   riddle:Riddle;
   answer:string;
 
@@ -70,12 +69,14 @@ messages:Message[];
   upgradeLevel(id:string){
     this.champService.upgradeChampionLevel(id).subscribe(res=>{
       this.getChampions();
+      this.getByName();
     });
   }
 
   upgradeQuality(id:string){
     this.champService.upgradeChampionQuality(id).subscribe(res=>{
       this.getChampions();
+      this.getByName();
     });
   }
 

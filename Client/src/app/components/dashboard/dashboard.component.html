@@ -39,11 +39,11 @@
           <h5 class="card-title">{{champ.name}}</h5>
           <p class="card-text">Level: {{champ.level}}</p>
           <p class="card-text">Quality: {{champ.quality}}</p>
-          <div *ngIf="userGold" class="row">
-            <a *ngIf="userGold >=200" class="fancy-btn" (click)="upgradeLevel(champ._id)">Level up!(200G)</a>
-            <a *ngIf="userGold <200">You need more gold to level up!</a>
-            <a *ngIf="userGold >= 500" class="fancy-btn" (click)="upgradeQuality(champ._id)">Upgrade quality!(500G)</a>
-            <a *ngIf="userGold <500 && !champ.quality == Diamond">You need more gold to increase quality!</a>
+          <div *ngIf="user.gold" class="row">
+            <a *ngIf="user.gold >=200" class="fancy-btn" (click)="upgradeLevel(champ._id)">Level up!(200G)</a>
+            <a *ngIf="user.gold <200">You need more gold to level up!</a>
+            <a *ngIf="user.gold >= 500" class="fancy-btn" (click)="upgradeQuality(champ._id)">Upgrade quality!(500G)</a>
+            <a *ngIf="user.gold <500 && !champ.quality == Diamond">You need more gold to increase quality!</a>
             <a *ngIf="champ.quality == Diamond">Your can no longer upgrade your champion</a>
           </div>
         </div>
@@ -58,8 +58,8 @@
         <p>You seem to lack champions, you can have a total of five!</p>
         <div>
           <label>Give your new champion a name!:
-            <input [(ngModel)]="newChampion.name">
-            <a class="fancy-btn" (click)="addChampion()">Add new champion</a>
+            <input [(ngModel)]="newChampion.name" id="champName">
+            <a class="fancy-btn" (click)="addChampion()" onclick="document.getElementById('champName').value = ''">Add new champion</a>
           </label>
         </div>
       </div>

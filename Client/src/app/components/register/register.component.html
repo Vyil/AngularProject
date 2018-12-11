@@ -29,6 +29,6 @@
         <span>Password is required</span>
     </div> 
   </div>
-  <button class="btn btn-primary" type="submit" [disabled]="!registerForm.form.valid">Register</button>
+  <button class="btn" type="submit" [disabled]="!registerForm.form.valid">Register</button>
   <a *ngIf="!registerForm.form.valid">The form must be valid in order to submit</a>
 </form>
