@@ -10,12 +10,12 @@ module.exports = {
 
         let token = req.get('Authorization')
         let cleanToken = token.substr(7)
-        let cleanedName = auth.decodeToken(cleanToken).sub;
+        let cleanedid = auth.decodeToken(cleanToken).sub;
 
         const newChampion = new Champion(req.body, {});
 
         User.findOne({
-                userName: cleanedName
+                _id: cleanedid
             })
             .then(rslt => {
                 newChampion.owner = rslt;
@@ -64,8 +64,8 @@ module.exports = {
                     return;
                 }
                 let cleanToken = token.substr(7)
-                let cleanedName = auth.decodeToken(cleanToken).sub;
-                User.findOne({userName: cleanedName})
+                let cleanedid = auth.decodeToken(cleanToken).sub;
+                User.findOne({_id: cleanedid})
                     .then(rslt => {
                         Champion.find({owner: rslt._id})
                             .then(result => {
@@ -136,11 +136,11 @@ module.exports = {
             return;
         }
         let cleanToken = token.substr(7)
-        let cleanedName = auth.decodeToken(cleanToken).sub;
+        let cleanedid = auth.decodeToken(cleanToken).sub;
 
 
         if(queryParam=='level'){
-            User.findOne({userName:cleanedName})
+            User.findOne({_id:cleanedid})
             .then(rslt=>{
                 if(rslt.gold>=200){
                     Champion.findOneAndUpdate({_id:idUrl},{$inc:{level:1}})

@@ -24,7 +24,6 @@ export class MessageComponent implements OnInit {
     this.message.recipient=this.user._id;
     this.messageService.submitMessage(this.message).subscribe(
       response=>{
-        location.reload();
         console.log('Succes: '+response)
       })
   }

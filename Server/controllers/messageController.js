@@ -10,10 +10,10 @@ module.exports = {
         
         let token = req.get('Authorization')
         let cleanToken = token.substr(7)
-        let cleanedName = auth.decodeToken(cleanToken).sub;
+        let cleanedid = auth.decodeToken(cleanToken).sub;
         
         const newMessage = new Message(req.body,{});
-        newMessage.author = cleanedName;
+        newMessage.author = cleanedid;
         newMessage.save()
         .then(
             User.findOne({_id:req.body.recipient})
@@ -36,18 +36,18 @@ module.exports = {
             res.status(401).json(new errorModel(401, 'Not authorized, no valid token')).end();
         }
         let cleanToken = token.substr(7)
-        let cleanedName = auth.decodeToken(cleanToken).sub;
+        let cleanedid = auth.decodeToken(cleanToken).sub;
 
         Message.findOne({_id:req.params.id})
         .then(result=>{
             if(result){
-                User.findOne({userName:cleanedName})                
+                User.findOne({_id:cleanedid})                
                 .then(rcpnt=>{
                     if(result.recipient.toString() == rcpnt._id.toString()){
                         result.remove()
                         res.status(200).send(new errorModel(200, 'Removed message: '+result))
                         return;
-                    } else if(result.author == cleanedName){
+                    } else if(result.author == cleanedid){
                         result.remove()
                         res.status(200).send(new errorModel(200, 'Removed message: '+result))
                         return;
@@ -79,11 +79,11 @@ module.exports = {
             res.status(401).json(new errorModel(401, 'Not authorized, no valid token')).end();
         }
         let cleanToken = token.substr(7)
-        let cleanedName = auth.decodeToken(cleanToken).sub;
+        let cleanedid = auth.decodeToken(cleanToken).sub;
 
         if(!queryParam){
             console.log('no query param')
-            User.findOne({userName:cleanedName})
+            User.findOne({_id:cleanedid})
             .then(rslt=>{
                 Message.find({recipient:rslt._id})
                 .then(result=>{

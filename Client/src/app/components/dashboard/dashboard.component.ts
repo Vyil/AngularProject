@@ -13,10 +13,10 @@ import { EditdialogComponent } from '../editdialog/editdialog.component';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit{
 
   user:User;
-  messages:Message[];
+messages:Message[];
   champions:Champion[];
   newChampion:Champion;
   userGold: Number;
@@ -64,8 +64,9 @@ export class DashboardComponent implements OnInit {
   }
 
   upgradeQuality(id:string){
-    this.champService.upgradeChampionQuality(id).subscribe();
-    location.reload();
+    this.champService.upgradeChampionQuality(id).subscribe(res=>{
+      this.getChampions();
+    });
   }
   addGold(){
     this.userService.getByName().subscribe(
@@ -73,8 +74,9 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteMessage(id:string){
-    this.messageService.deleteMessage(id).subscribe();
-    //location.reload();
+    this.messageService.deleteMessage(id).subscribe(res=>{
+      this.getMessageByName();
+    });
   }
 
   openDialog(): void {
@@ -87,5 +89,4 @@ export class DashboardComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
-
 }

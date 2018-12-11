@@ -25,7 +25,7 @@ module.exports = {
         // })
         .then(result=>{
             if(result.password == password){
-                let token = auth.encodeToken(result.userName);
+                let token = auth.encodeToken(result._id);
                 let resultObject = {
                     "token":token,
                     "Message:":"Succesful login for user: "+result.userName

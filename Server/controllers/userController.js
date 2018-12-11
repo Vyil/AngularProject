@@ -56,8 +56,8 @@ module.exports ={
                 return;
             }
             let cleanToken = token.substr(7)
-            let cleanedName = auth.decodeToken(cleanToken).sub;
-            User.findOne({userName:cleanedName})
+            let cleanedid = auth.decodeToken(cleanToken).sub;
+            User.findOne({_id:cleanedid})
             .then(result=>{
                 res.status(200).json(result);
                 return;
