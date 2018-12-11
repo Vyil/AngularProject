@@ -6,20 +6,28 @@
     <input type="text" class="form-control" placeholder="firstName" [(ngModel)]="user.firstName" name="firstName" #firstName="ngModel" required>
     <div *ngIf= "firstName.invalid && (firstName.dirty || firstName.touched)"  class="alert alert-danger">
         <span>Firstname is required</span>
-    </div>
-    
+    </div>    
   </div>
   <div class="form-group">
     <label for="lastName">LastName</label>
-    <input type="text" class="form-control" id="lastName" placeholder="lastName" [(ngModel)]="user.lastName" name="lastName">
+    <input type="text" class="form-control" placeholder="lastName" [(ngModel)]="user.lastName" name="lastName" #lastName="ngModel" required>
+    <div *ngIf= "lastName.invalid && (lastName.dirty || lastName.touched)"  class="alert alert-danger">
+        <span>Lastname is required</span>
+    </div> 
   </div>
   <div class="form-group">
     <label for="userName">Username</label>
-    <input type="text" class="form-control" id="userName" placeholder="Username" [(ngModel)]="user.userName" name="userName">
+    <input type="text" class="form-control" placeholder="Username" [(ngModel)]="user.userName" name="userName" #userName="ngModel" required>
+    <div *ngIf= "userName.invalid && (userName.dirty || userName.touched)"  class="alert alert-danger">
+        <span>Username is required</span>
+    </div> 
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="user.password" name="password">
+    <input type="password" class="form-control" placeholder="Password" [(ngModel)]="user.password" name="password" #password="ngModel" required>
+    <div *ngIf= "password.invalid && (password.dirty || password.touched)"  class="alert alert-danger">
+        <span>Password is required</span>
+    </div> 
   </div>
   <button class="btn btn-primary" type="submit" [disabled]="!registerForm.form.valid">Register</button>
   <a *ngIf="!registerForm.form.valid">The form must be valid in order to submit</a>
