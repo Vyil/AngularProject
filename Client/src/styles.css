@@ -48,3 +48,14 @@
 	position:relative;
 	top:1px;
 }
+
+.standardButton{
+	background: #ffffff;
+}
+
+.centerCustom{
+	margin: auto;
+  width: 50%;
+
+  padding: 5px;
+}

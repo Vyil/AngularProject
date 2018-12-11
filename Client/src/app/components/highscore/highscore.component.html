@@ -1,6 +1,6 @@
-<h2>Highscore list for champions!</h2>
+<h2 class="centerCustom">Highscore list for champions!</h2>
 
-  <table class="table table-striped">
+  <table class="table table-hover centerCustom">
     <thead>
       <tr>
         <th scope="col">Name</th>
@@ -11,12 +11,16 @@
     </thead>
     <tbody>
         <div *ngFor="let champ of champions">
-      <tr>
+      <tr class="centerCustom">
         <th scope="row"></th>
         <td>{{champ.name}}</td>
         <td>{{champ.level}}</td>
         <td>{{champ.quality}}</td>
-        <td><a class="button1" (click)="getOwner(champ.owner)">owner</a></td>
+        <td><a class="btn standardButton">
+            <i class="material-icons" (click)="getOwner(champ.owner)">
+                account_circle
+            </i>
+          owner</a></td>
       </tr>
     </div>
     </tbody>
