@@ -2,7 +2,7 @@
   <h2 class="centerCustom">Welcome {{user.userName}}, you have {{user.gold}} gold coins!</h2>
 </div>
 <div class="row">
-  <a class="btn greyButton" (click)="openDialog()">
+  <a class="btn fancy-btn" (click)="openDialog()">
     Edit your user settings
     <i class="material-icons">
       build
@@ -11,7 +11,7 @@
 </div>
 <br>
 <div class="row">
-  <a class="btn greyButton" (click)="deleteAccount()">
+  <a class="btn fancy-btn" (click)="deleteAccount()">
     Delete account
     <i class="material-icons">
       block
@@ -43,7 +43,7 @@
 
 
   <div *ngIf="champions">
-    <div class="centerCustom">
+    <div class="row centerCustom">
       <div *ngIf="champions.length < 5">
         <p>You seem to lack champions, you can have a total of five!</p>
         <div>
@@ -60,7 +60,7 @@
   <div *ngIf="messages">
     <h4 class="centerCustom">Your message wall: </h4>
     <div *ngFor="let message of messages">
-      <div class="card centerCustom">
+      <div class="row card centerCustom">
         <div class="card-header">
           <p>{{message.content}}</p>
         </div>

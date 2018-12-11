@@ -7,7 +7,7 @@
 <ul class="players" [@filterAnimation]="playerTotal">
   <li *ngFor="let user of selectedUsers" class="players">
     <div class="inner">
-      <p (click)="onSelect(user)">{{ user.userName }}</p>
+      <p (click)="onSelect(user)" class="customColorBlack">{{ user.userName }}</p>
     </div>
   </li>
 </ul>
