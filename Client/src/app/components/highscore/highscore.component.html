@@ -1,6 +1,7 @@
 <h2 class="centerCustom">Highscore list for champions!</h2>
 
-  <table class="table table-hover centerCustom">
+<div class="table table-responsive">
+  <table class="table-hover centerCustom">
     <thead>
       <tr>
         <th scope="col">Name</th>
@@ -10,9 +11,7 @@
       </tr>
     </thead>
     <tbody>
-        <div *ngFor="let champ of champions">
-      <tr class="centerCustom">
-        <th scope="row"></th>
+      <tr *ngFor="let champ of champions">
         <td>{{champ.name}}</td>
         <td>{{champ.level}}</td>
         <td>{{champ.quality}}</td>
@@ -22,7 +21,7 @@
             </i>
           owner</a></td>
       </tr>
-    </div>
     </tbody>
   </table>
+</div>
 
