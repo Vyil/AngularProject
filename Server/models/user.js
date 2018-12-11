@@ -33,6 +33,13 @@ const UserSchema = new Schema({
     }]
 });
 
+UserSchema.pre('remove',function(next){
+    console.log('User pre middleware called')
+    const Champion = mongoose.model('champion');
+    Champion.deleteMany({owner:this._id})
+    .then(()=>next());
+});
+
 // hash the password
 // UserSchema.pre('save', function(next){
 //     var user = this;
