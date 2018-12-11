@@ -53,6 +53,11 @@
 	background: #ffffff;
 }
 
+.greyButton{
+	background:#dad4d4;
+	width: 20%
+}
+
 .centerCustom{
 	margin: auto;
   width: 50%;

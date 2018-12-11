@@ -20,7 +20,8 @@ const UserSchema = new Schema({
         required:[true,'Password is required']
     },
     gold:{
-        type:Number
+        type:Number,
+        default:0
     },
     champions:[{
         type:Schema.Types.ObjectId,

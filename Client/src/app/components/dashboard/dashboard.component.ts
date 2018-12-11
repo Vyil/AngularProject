@@ -92,4 +92,9 @@ messages:Message[];
       this.getByName();
     });
   }
+
+  deleteAccount(){
+    if(confirm('Are you sure you want to delete the account?'))
+    console.log('delete acc toggled')
+  }
 }
