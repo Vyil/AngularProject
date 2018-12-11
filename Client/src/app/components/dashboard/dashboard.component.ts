@@ -112,12 +112,13 @@ messages:Message[];
   }
 
   checkRiddleAnswer(){
-    if(this.riddle.guess == this.riddle.answer){
+    if(this.riddle.guess.toLocaleLowerCase() == this.riddle.answer){
       
       this.userService.increaseGold().subscribe(res=>{
         this.snackBar.open('The riddle was correctly guessed!','Undo',{
           duration:3000
-        });    
+        });
+        this.riddle = null;
         this.getByName();
       });      
     } else {
