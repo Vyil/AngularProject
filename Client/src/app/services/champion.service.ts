@@ -3,15 +3,24 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Champion } from '../models/champion';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class ChampionService {
 
   private URL: string = 'http://localhost:3000/api/champion';
-  private filler = {
-    message:'empty put object'
+  private level = {
+    "upgrade":"level"
   }
+  private quality = {
+    "upgrade":"quality"
+  }
+
+  
   constructor(private http: HttpClient) { }
 
   //Methods
@@ -48,17 +57,19 @@ export class ChampionService {
   }
 
   upgradeChampionLevel(id:string):Observable<Champion>{
-    return this.http.put<Champion>(this.URL+'/'+id+'?upgrade=level',this.filler,{
+    return this.http.put<Champion>(this.URL+'/'+id,this.level,{
       headers:{
-        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN'),
+        'Content-Type': 'application/json'
       }
     });
   }
 
   upgradeChampionQuality(id:string):Observable<Champion>{
-    return this.http.put<Champion>(this.URL+'/'+id+'?upgrade=quality',this.filler,{
+    return this.http.put<Champion>(this.URL+'/'+id+'?upgrade=quality',this.quality,{
       headers:{
-        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN'),
+        'Content-Type': 'application/json'
       }
     });
   }

@@ -131,6 +131,7 @@ module.exports = {
         let idUrl = req.params.id;
         let token = req.get('Authorization')
         var queryParam = req.query.upgrade;
+        var bodyParam = req.body.upgrade;
         if (!token) {
             res.status(401).json(new errorModel(401, 'Not authorized, no valid token'));
             return;
@@ -139,7 +140,7 @@ module.exports = {
         let cleanedid = auth.decodeToken(cleanToken).sub;
 
 
-        if(queryParam=='level'){
+        if(bodyParam=='level'){
             User.findOne({_id:cleanedid})
             .then(rslt=>{
                 if(rslt.gold>=200){
@@ -147,7 +148,7 @@ module.exports = {
                     .then(result=>{
                         rslt.gold -=200;
                         rslt.save();
-                        res.status(200).send('Champion level upgraded!')
+                        res.status(200).json({message:'Champion upgraded'})
                         return;
                     })
                     .catch(err=>{
@@ -155,19 +156,19 @@ module.exports = {
                         return;
                     })
                 } else {
-                    res.status(400).send(new errorModel(400,'You do not have enough gold!'))
+                    res.status(200).send(new errorModel(200,'You do not have enough gold!'))
                     return;
                 }
             })
            
-        } else if(queryParam=='quality'){
+        } else if(bodyParam=='quality'){
             Champion.findOne({_id:idUrl})
             .then(result=>{
                 if(result.quality == 'Bronze'){
                     result.quality = 'Silver'
                     result.save()
                     .then(
-                        res.status(200).send('Quality upgraded').end()                        
+                        res.status(200).json({message:'Champion upgraded'}).end()                        
                     )
                     .catch(err=>{
                         res.status(500).send(new errorModel(500,'Error occured: '+err))
@@ -177,7 +178,7 @@ module.exports = {
                     result.quality = 'Gold'
                     result.save()
                     .then(
-                        res.status(200).send('Quality upgraded').end()                        
+                        res.status(200).json({message:'Champion upgraded'}).end()                        
                     )
                     .catch(err=>{
                         res.status(500).send(new errorModel(500,'Error occured: '+err))
@@ -187,14 +188,14 @@ module.exports = {
                     result.quality = 'Diamond'
                     result.save()
                     .then(
-                        res.status(200).send('Quality upgraded').end()                        
+                        res.status(200).json({message:'Champion upgraded'}).end()                        
                     )
                     .catch(err=>{
                         res.status(500).send(new errorModel(500,'Error occured: '+err))
                         return
                     })
                 } else {
-                    res.status(400).send(new errorModel(400,'Calm down, champion has highest quality already!'))
+                    res.status(200).send(new errorModel(200,'Calm down, champion has highest quality already!'))
                     return;
                 }
             })

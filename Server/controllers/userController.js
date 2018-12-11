@@ -127,8 +127,8 @@ module.exports ={
     addGold(req,res){
         let token = req.get('Authorization')
         let cleanToken = token.substr(7)
-        let cleanedName = auth.decodeToken(cleanToken).sub;
-        User.findOneAndUpdate({userName:cleanedName},{$inc:{gold:200}})
+        let cleanedid = auth.decodeToken(cleanToken).sub;
+        User.findOneAndUpdate({_id:cleanedid},{$inc:{gold:200}})
         .then(res.status(200).send('succes'))
     }
 }
