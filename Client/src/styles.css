@@ -32,6 +32,16 @@ body {
 	width:100%;
 }
 
+.navbar{
+	background: #333 !important;
+	color:orange !important;
+}
+
+.nav-item, .navbar-brand{
+	color:orange !important;
+}
+
+
 .blockquote-footer{
 	color:orange;
 }

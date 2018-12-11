@@ -21,6 +21,7 @@ import { EditdialogComponent } from './components/editdialog/editdialog.componen
 import { MessagedialogComponent } from './components/messagedialog/messagedialog.component';
 import { MatIconModule } from "@angular/material/icon";
 import { MatSnackBarModule } from '@angular/material';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { MatSnackBarModule } from '@angular/material';
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
-    MatSnackBarModule 
+    MatSnackBarModule ,
+    NgbModule.forRoot()
   ],
   entryComponents:[
     EditdialogComponent,
