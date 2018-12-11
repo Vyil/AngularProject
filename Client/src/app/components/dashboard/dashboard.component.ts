@@ -54,13 +54,15 @@ messages:Message[];
 
   addChampion(){
     console.log('Added: '+this.newChampion.name)
-    this.champService.createNewChampions(this.newChampion).subscribe();
-    location.reload();
+    this.champService.createNewChampions(this.newChampion).subscribe(res=>{
+      this.getChampions();
+    });
   }
 
   upgradeLevel(id:string){
-    this.champService.upgradeChampionLevel(id).subscribe();
-    location.reload();
+    this.champService.upgradeChampionLevel(id).subscribe(res=>{
+      this.getChampions();
+    });
   }
 
   upgradeQuality(id:string){
@@ -86,7 +88,8 @@ messages:Message[];
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log(result);
+      this.getByName();
     });
   }
 }

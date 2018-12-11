@@ -18,6 +18,7 @@ import { MessageComponent } from './components/message/message.component';
 import { MatDialogModule,MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditdialogComponent } from './components/editdialog/editdialog.component';
+import { MessagedialogComponent } from './components/messagedialog/messagedialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { EditdialogComponent } from './components/editdialog/editdialog.componen
     PlayerlistComponent,
     PlayerDetailComponent,
     MessageComponent,    
-    EditdialogComponent
+    EditdialogComponent, MessagedialogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +46,8 @@ import { EditdialogComponent } from './components/editdialog/editdialog.componen
     MatCheckboxModule
   ],
   entryComponents:[
-    EditdialogComponent
+    EditdialogComponent,
+    MessagedialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

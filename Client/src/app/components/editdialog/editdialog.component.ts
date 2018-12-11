@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-editdialog',
@@ -12,7 +13,9 @@ export class EditdialogComponent implements OnInit {
   private user:User;
   private repeatedPass:string = '';
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private dialogRef:MatDialogRef<EditdialogComponent>,
+              @Inject(MAT_DIALOG_DATA)public data:any) { }
 
   ngOnInit() {
     this.user = new User();
@@ -24,7 +27,9 @@ export class EditdialogComponent implements OnInit {
     if(this.user.userName.length <2 ||!this.user.userName ){
       console.log('nope')
     }
-    this.userService.editUserName(this.user._id,this.user).subscribe();
+    this.userService.editUserName(this.user._id,this.user).subscribe(res=>{
+      this.dialogRef.close('Username Saved');
+    });
   }
 
   editUserPassword(){

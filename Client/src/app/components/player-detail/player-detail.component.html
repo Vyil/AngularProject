@@ -19,4 +19,8 @@
       </li>
     </ul>
 </div>
-<app-message [user]="user"></app-message>
+<div *ngIf="user">
+    <a class="myButton" (click)="openDialog()">Send {{user.userName}} a message</a>
+</div>
+
+<!-- <app-message [user]="user"></app-message> -->

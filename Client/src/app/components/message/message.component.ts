@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { MessageService } from 'src/app/services/message.service';
 import { Message } from 'src/app/models/message';
 import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-message',
@@ -13,7 +14,8 @@ export class MessageComponent implements OnInit {
   @Input() user:User;
 
   constructor(
-    private messageService:MessageService
+    private messageService:MessageService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -24,6 +26,7 @@ export class MessageComponent implements OnInit {
     this.message.recipient=this.user._id;
     this.messageService.submitMessage(this.message).subscribe(
       response=>{
+        this.router.navigate(['/players/'+this.user._id]);
         console.log('Succes: '+response)
       })
   }

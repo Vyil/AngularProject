@@ -6,6 +6,8 @@ import { ChampionService } from 'src/app/services/champion.service';
 import { Champion } from 'src/app/models/champion';
 import { MessageService } from 'src/app/services/message.service';
 import { Message } from 'src/app/models/message';
+import { MessagedialogComponent } from '../messagedialog/messagedialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-player-detail',
@@ -18,9 +20,9 @@ export class PlayerDetailComponent implements OnInit {
 
   user: User;
   champions: Champion[];
-  messages: Message[];
+  @Input() messages: Message[];
 
-  constructor(private router: Router,
+  constructor(private dialog: MatDialog,
               private route: ActivatedRoute,
               private userService: UserService,
               private champService: ChampionService,
@@ -52,6 +54,20 @@ export class PlayerDetailComponent implements OnInit {
   getUserMessages(id){
     this.messageService.getMessageById(id).subscribe(
       messages=>this.messages=messages);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(MessagedialogComponent, {
+      width: '500px',
+      data: {
+        usr: this.route.snapshot.paramMap.get('_id')
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.getUserMessages(this.user._id);
+    });
   }
 
 }

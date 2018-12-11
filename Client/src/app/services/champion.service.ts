@@ -9,6 +9,9 @@ import { Champion } from '../models/champion';
 export class ChampionService {
 
   private URL: string = 'http://localhost:3000/api/champion';
+  private filler = {
+    message:'empty put object'
+  }
   constructor(private http: HttpClient) { }
 
   //Methods
@@ -45,7 +48,7 @@ export class ChampionService {
   }
 
   upgradeChampionLevel(id:string):Observable<Champion>{
-    return this.http.put<Champion>(this.URL+'/'+id+'?upgrade=level',null,{
+    return this.http.put<Champion>(this.URL+'/'+id+'?upgrade=level',this.filler,{
       headers:{
         'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
       }
@@ -53,7 +56,7 @@ export class ChampionService {
   }
 
   upgradeChampionQuality(id:string):Observable<Champion>{
-    return this.http.put<Champion>(this.URL+'/'+id+'?upgrade=quality',null,{
+    return this.http.put<Champion>(this.URL+'/'+id+'?upgrade=quality',this.filler,{
       headers:{
         'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
       }

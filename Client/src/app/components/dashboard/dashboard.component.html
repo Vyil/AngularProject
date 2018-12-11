@@ -26,7 +26,8 @@
                   <a *ngIf="userGold >=200"class="myButton" (click)="upgradeLevel(champ._id)">Level up!(200G)</a>
                   <a *ngIf="userGold <200" >You need more gold to level up!</a>
                   <a *ngIf="userGold >= 500"class="myButton" (click)="upgradeQuality(champ._id)">Upgrade quality!(500G)</a>
-                  <a *ngIf="userGold <500" >You need more gold to increase quality!</a>
+                  <a *ngIf="userGold <500 && !champ.quality == Diamond" >You need more gold to increase quality!</a>
+                  <a *ngIf="champ.quality == Diamond">Your can no longer upgrade your champion</a>
               </div>              
             </div>
           </div>
