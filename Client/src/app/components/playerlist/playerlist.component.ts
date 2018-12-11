@@ -52,6 +52,10 @@ export class PlayerlistComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
+    this.cloneUsers();
+  }
+  cloneUsers(){
+    this.userService.getAll().subscribe(usr =>this.selectedUsers = usr)
   }
 
   getAll(){
