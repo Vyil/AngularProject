@@ -15,7 +15,8 @@
     <h3>Messages:</h3>
     <ul>
       <li *ngFor="let message of messages">
-        <span>{{message.content}}</span>
+        <p>{{message.content}}</p>
+        <p>Written by: {{message.authorName}}</p>
       </li>
     </ul>
 </div>

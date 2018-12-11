@@ -21,6 +21,19 @@ module.exports = {
                 result.messages.push(newMessage)
                 return result.save();
             })
+            .then(
+                User.findOne({_id:cleanedid})
+                .then(rslt=>{
+                    newMessage.authorName = rslt.userName
+                    newMessage.save()
+                    .then(
+                        res.status(200).send(new errorModel(200,'Created message: '+req.body.content)).end()
+                    )
+                    .catch(err=>{res.status(500).send(new errorModel(500,'Error occured: '+err)).end();})
+                })
+                .catch(err=>{res.status(500).send(new errorModel(500,'Error occured: '+err)).end();})
+            )
+            .catch(err=>{res.status(500).send(new errorModel(500,'Error occured: '+err)).end();})
         )
         .then(res.status(200).send(new errorModel(200,"created message: "+req.body.content)))
         .catch(err=>{
