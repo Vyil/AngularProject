@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditdialogComponent } from './components/editdialog/editdialog.component';
 import { MessagedialogComponent } from './components/messagedialog/messagedialog.component';
 import { MatIconModule } from "@angular/material/icon";
+import { MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MatIconModule } from "@angular/material/icon";
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule 
   ],
   entryComponents:[
     EditdialogComponent,

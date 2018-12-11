@@ -5,10 +5,12 @@ import { MessageService } from 'src/app/services/message.service';
 import { Message } from 'src/app/models/message';
 import { Champion } from 'src/app/models/champion';
 import { ChampionService } from 'src/app/services/champion.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBarConfig } from '@angular/material';
 import { EditdialogComponent } from '../editdialog/editdialog.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { riddles , Riddle} from '../../riddles';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +24,8 @@ messages:Message[];
   champions:Champion[];
   newChampion:Champion;
   userGold: Number;
+  riddle:Riddle;
+  answer:string;
 
   constructor(
     private userService:UserService,
@@ -29,14 +33,14 @@ messages:Message[];
     private champService: ChampionService,
     private dialog: MatDialog,
     private authService:AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
     this.getByName();
     this.getMessageByName();
     this.getChampions();
-    this.addGold();
     this.newChampion = new Champion();
   }
 
@@ -74,10 +78,6 @@ messages:Message[];
       this.getChampions();
     });
   }
-  addGold(){
-    this.userService.getByName().subscribe(
-      res=>this.userGold=res.gold);
-  }
 
   deleteMessage(id:string){
     this.messageService.deleteMessage(id).subscribe(res=>{
@@ -103,6 +103,27 @@ messages:Message[];
         this.authService.logOutUser();
         this.router.navigate(['/home'])
       });
+    }
+  }
+
+  getRandomRiddle(){
+    this.riddle = riddles[Math.floor(Math.random()*riddles.length)];
+    console.log(this.riddle.question);
+  }
+
+  checkRiddleAnswer(){
+    if(this.riddle.guess == this.riddle.answer){
+      
+      this.userService.increaseGold().subscribe(res=>{
+        this.snackBar.open('The riddle was correctly guessed!','Undo',{
+          duration:3000
+        });    
+        this.getByName();
+      });      
+    } else {
+      this.snackBar.open('The riddle was not guessed!','Undo',{
+        duration:3000
+      });  
     }
   }
 }

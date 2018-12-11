@@ -17,7 +17,17 @@
       block
     </i>
   </a>
-
+</div>
+<br>
+<div class="row">
+  <a class="btn fancy-btn" (click)="getRandomRiddle()">Get Riddle</a>
+  <div *ngIf="riddle">
+    <div class="row">
+    <label>{{riddle.question}}</label>
+    <input type="text" name="answer" [(ngModel)]="riddle.guess">
+    <a class="btn"(click)="checkRiddleAnswer()">Check answer</a>
+  </div>
+  </div>
 </div>
 
 <div *ngIf="champions">

@@ -156,6 +156,6 @@ module.exports = {
                     gold: 200
                 }
             })
-            .then(res.status(200).send('succes')).end();
+            .then(res.status(200).json({message:'success!'}).end());
     }
 }

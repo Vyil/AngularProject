@@ -49,4 +49,12 @@ export class UserService {
       }
     });
   }
+
+  increaseGold(){
+    return this.http.post<User>(this.URL+'/gold',null,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    });
+  }
 }
