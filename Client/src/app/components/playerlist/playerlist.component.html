@@ -1,9 +1,9 @@
-<h2>All players!</h2>
+<h2 class="centerCustom">Search through all players!</h2>
 
-<form>
+<form class="centerCustom">
   <input #criteria (input)="updateCriteria(criteria.value)" placeholder="Search Players" />
 </form>
-
+<div class="centerCustom">
 <ul class="players" [@filterAnimation]="playerTotal">
   <li *ngFor="let user of selectedUsers" class="players">
     <div class="inner">
@@ -11,3 +11,4 @@
     </div>
   </li>
 </ul>
+</div>

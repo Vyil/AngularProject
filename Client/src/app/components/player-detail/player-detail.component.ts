@@ -78,4 +78,10 @@ export class PlayerDetailComponent implements OnInit {
     this.userService.getByName().subscribe(
       res=>this.currentUser=res._id)
   }
+
+  deleteMessage(id:string){
+    this.messageService.deleteMessage(id).subscribe(res=>{
+      this.getUserMessages(this.route.snapshot.paramMap.get('_id'));
+    });
+  }
 }

@@ -1,10 +1,10 @@
 <div *ngIf="user">
-  <p>Welcome {{user.userName}}, you have {{user.gold}} gold coins!</p>
-  <a class="myButton" (click)="openDialog()">Edit your user settings</a>
+  <h2 class="centerCustom">Welcome {{user.userName}}, you have {{user.gold}} gold coins!</h2>
+  <a class="btn btn-default" (click)="openDialog()">Edit your user settings</a>
 </div>
 
 <div *ngIf="champions">
-  <h3 class="centerCustom">Your champions: </h3>
+  <h4 class="centerCustom">Your champions: </h4>
   <div class="row centerCustom">
     <div *ngFor="let champ of champions">
       <div class="card col-sm centerCustom" style="width: 18rem;">
@@ -41,7 +41,7 @@
 
 
   <div *ngIf="messages">
-    <h3 class="centerCustom">Your message wall: </h3>
+    <h4 class="centerCustom">Your message wall: </h4>
     <div *ngFor="let message of messages">
       <div class="card centerCustom">
         <div class="card-header">

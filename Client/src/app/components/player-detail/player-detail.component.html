@@ -1,9 +1,9 @@
 <div *ngIf="user">
-  <h2>Player profile: {{user.userName}}</h2>
+  <h2 class="centerCustom">Player profile: {{user.userName}}</h2>
 </div>
 
 <div *ngIf="champions">
-  <h3>Champions:</h3>
+  <h3 class="centerCustom">Champions:</h3>
   <ul>
     <li *ngFor="let champ of champions">
       <span>{{champ.name}}</span>
@@ -12,17 +12,22 @@
 </div>
 
 <div *ngIf="messages">
-    <h3>Messages:</h3>
+    <h3 class="centerCustom">Messages:</h3>
     <div *ngFor="let message of messages">
-    <div class="card row">
+    <div class="card row centerCustom">
       <div class="col-sm-4 col-md-4 col-lg-4">
         <div class="card-header">
           <p>{{message.content}}</p>
         </div>
         <div class="card-body">
           <blockquote class="blockquote mb-0">
-            <footer class="blockquote-footer">{{message.authorName}}</footer>
-            <a *ngIf="currentUser == message.author" class="btn">Remove</a>
+            <footer class="blockquote-footer">{{message.authorName}}
+                <a *ngIf="currentUser == message.author" class="btn">
+                    <i class="material-icons" (click)="deleteMessage(message._id)">
+                        delete
+                      </i>
+                    </a>
+            </footer>            
           </blockquote>
         </div>
       </div>
@@ -30,5 +35,5 @@
     </div>
 </div>
 <div *ngIf="user">
-    <a class="myButton" (click)="openDialog()">Send {{user.userName}} a message</a>
+    <a class="btn btn-default centerCustom" (click)="openDialog()">Send {{user.userName}} a message</a>
 </div>
