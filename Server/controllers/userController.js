@@ -9,22 +9,22 @@ module.exports ={
         User.findOne({userName:req.body.userName})
         .then(result=>{
             if(result){
-                res.status(409).send(new errorModel(409,'Username already exists'))
+                res.status(409).send(new errorModel(409,'Username already exists')).end();
             } else {
                 const newUser = new User(req.body,{});
                 newUser.save()
                 .then(result=>{
-                    res.status(200).json({message:"Created user: "+result});
+                    res.status(200).json({message:"Created user: "+result}).end();
                     return;
                 })
                 .catch(err=>{
-                    res.status(400).send(new errorModel(400,'Error occured: '+err));
+                    res.status(400).send(new errorModel(400,'Error occured: '+err)).end();
                     return;
                 });
             }
         })
         .catch(err=>{
-            res.status(409).send(new errorModel(409,'Username already exists: '+err))
+            res.status(409).send(new errorModel(409,'Username already exists: '+err)).end();
         })        
     },
 
@@ -38,36 +38,36 @@ module.exports ={
             User.find({})
             .then(result=>{
                 if(result){
-                    res.status(200).json(result);
+                    res.status(200).json(result).end();
                     return;
                 } else {
-                    res.status(404).send(new errorModel(400,'Something went wrong, no results found'));
+                    res.status(404).send(new errorModel(400,'Something went wrong, no results found')).end();
                     return;
                 }                
             })
             .catch(error=>{
-                res.status(400).errorModel(400,'Error occoured: '+error);
+                res.status(400).errorModel(400,'Error occoured: '+error).end();
                 return;
             })
             //Find by query
         } else if(queryParam == 'yes'){
             if(!token){
-                res.status(401).json(new errorModel(401, 'Not authorized, no valid token'));
+                res.status(401).json(new errorModel(401, 'Not authorized, no valid token')).end();
                 return;
             }
             let cleanToken = token.substr(7)
             let cleanedid = auth.decodeToken(cleanToken).sub;
             User.findOne({_id:cleanedid})
             .then(result=>{
-                res.status(200).json(result);
+                res.status(200).json(result).end();
                 return;
             })
             .catch(err=>{
-                res.status(500).send(new errorModel(500,'Error occured: '+err))
+                res.status(500).send(new errorModel(500,'Error occured: '+err)).end();
                 return;
             })
         }else{
-            res.status(404).send(new errorModel(404,'Unknown request'));
+            res.status(404).send(new errorModel(404,'Unknown request')).end();
             return;
         }
     },
@@ -78,15 +78,15 @@ module.exports ={
         User.findOne({_id:idUrl})
         .then(result=>{
             if(!result){
-                res.status(404).send(new errorModel(404,'User with given ID not found'));
+                res.status(404).send(new errorModel(404,'User with given ID not found')).end();
                 return;
             } else{
-                res.status(200).json(result);
+                res.status(200).json(result).end();
                 return;
             }
         })
         .catch(err=>{
-            res.status(400).send(new errorModel(400,'Error occured: '+err));
+            res.status(400).send(new errorModel(400,'Error occured: '+err)).end();
             return;
         })
     },
@@ -99,15 +99,15 @@ module.exports ={
         let username=req.body.userName;
 
         if(req.body.gold){
-            res.status(403).send(new errorModel(403,'You are not allowed to edit gold'));
+            res.status(403).send(new errorModel(403,'You are not allowed to edit gold')).end();
         }
 
         User.findOneAndUpdate({_id:idUrl},{userName:username})
         .then(result=>{
-            res.status(200).send(new errorModel(200,'User updated'));
+            res.status(200).send(new errorModel(200,'User updated')).end();
         })
         .catch(err=>{
-            res.status(500).send(new errorModel(500,'Something went wrong trying to update the user: '+err));
+            res.status(500).send(new errorModel(500,'Something went wrong trying to update the user: '+err)).end();
         })
     },
 
@@ -117,10 +117,10 @@ module.exports ={
 
         User.findOneAndRemove({_id:idUrl})
         .then(result=>{
-            res.status(200).send(new errorModel(200,'User with ID: '+idUrl+' removed'));
+            res.status(200).send(new errorModel(200,'User with ID: '+idUrl+' removed')).end();
         })
         .catch(err=>{
-            res.status(500).send(new errorModel(500,'Something went wrong trying to remove the user'));
+            res.status(500).send(new errorModel(500,'Something went wrong trying to remove the user')).end();
         })
     },
 
@@ -129,6 +129,6 @@ module.exports ={
         let cleanToken = token.substr(7)
         let cleanedid = auth.decodeToken(cleanToken).sub;
         User.findOneAndUpdate({_id:cleanedid},{$inc:{gold:200}})
-        .then(res.status(200).send('succes'))
+        .then(res.status(200).send('succes')).end();
     }
 }

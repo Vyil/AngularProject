@@ -30,13 +30,13 @@ module.exports = {
                     "token":token,
                     "Message:":"Succesful login for user: "+result.userName
                 }
-                res.status(200).json(resultObject)
+                res.status(200).json(resultObject).end();
             }else {
-                res.status(401).json({message:'Rejected'})
+                res.status(401).json({message:'Rejected'}).end();
             }
         })
         .catch(err=>{
-            res.status(500).send(new errorModel(500,'Error occured: '+err))
+            res.status(500).send(new errorModel(500,'Error occured: '+err)).end();
         })
     }
 

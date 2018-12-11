@@ -31,7 +31,7 @@ module.exports = {
                 })
             )
             .catch(err => {
-                res.status(500).send(new errorModel(500, 'Something went wrong'));
+                res.status(500).send(new errorModel(500, 'Something went wrong')).end();
             })
     },
 
@@ -48,19 +48,19 @@ module.exports = {
                         result.sort((a, b) => {
                             return b.level - a.level
                         })
-                        res.status(200).json(result);
+                        res.status(200).json(result).end();
                     })
                     .catch(err => {
-                        res.status(500).send(new errorModel(500, 'Error occured: ' + err));
+                        res.status(500).send(new errorModel(500, 'Error occured: ' + err)).end();
                     })
             } else {
                 if (!queryParam == 'yes') {
-                    res.status(404).send(new errorModel(404, 'Unknown query command, has to be yes'))
+                    res.status(404).send(new errorModel(404, 'Unknown query command, has to be yes')).end();
                     return;
                 }
                 let token = req.get('Authorization')
                 if (!token) {
-                    res.status(401).json(new errorModel(401, 'Not authorized, no valid token'));
+                    res.status(401).json(new errorModel(401, 'Not authorized, no valid token')).end();
                     return;
                 }
                 let cleanToken = token.substr(7)
@@ -69,16 +69,16 @@ module.exports = {
                     .then(rslt => {
                         Champion.find({owner: rslt._id})
                             .then(result => {
-                                res.status(200).json(result)
+                                res.status(200).json(result).end();
                                 return;
                             })
                             .catch(err => {
-                                res.status(500).send(new errorModel(500, 'Error occured: ' + err))
+                                res.status(500).send(new errorModel(500, 'Error occured: ' + err)).end();
                                 return;
                             })
                     })
                     .catch(error => {
-                        res.status(500).send(new errorModel(500, 'Error occured: ' + error))
+                        res.status(500).send(new errorModel(500, 'Error occured: ' + error)).end();
                         return;
                     })
 
@@ -88,10 +88,10 @@ module.exports = {
                     _id: idUrl
                 })
                 .then(result => {
-                    res.status(200).json(result);
+                    res.status(200).json(result).end();
                 })
                 .catch(err => {
-                    res.status(500).send(new errorModel(500, 'Error occured: ' + err));
+                    res.status(500).send(new errorModel(500, 'Error occured: ' + err)).end();
                 })
         }
     },
@@ -100,7 +100,7 @@ module.exports = {
         let idUrl = req.params.id;
         let token = req.get('Authorization')
         if (!token) {
-            res.status(401).json(new errorModel(401, 'Not authorized, no valid token'));
+            res.status(401).json(new errorModel(401, 'Not authorized, no valid token')).end();
             return;
         }
         let cleanToken = token.substr(7)
@@ -111,14 +111,14 @@ module.exports = {
             })
             .then(result => {
                 if (result) {
-                    res.status(200).json(result);
+                    res.status(200).json(result).end();
                 } else {
-                    res.status(404).send(new errorModel(404, 'No champions found for user'));
+                    res.status(404).send(new errorModel(404, 'No champions found for user')).end();
                 }
 
             })
             .catch(err => {
-                res.status(500).send(new errorModel(500, 'Error occured: ' + err));
+                res.status(500).send(new errorModel(500, 'Error occured: ' + err)).end();
             })
     },
 
@@ -133,7 +133,7 @@ module.exports = {
         var queryParam = req.query.upgrade;
         var bodyParam = req.body.upgrade;
         if (!token) {
-            res.status(401).json(new errorModel(401, 'Not authorized, no valid token'));
+            res.status(401).json(new errorModel(401, 'Not authorized, no valid token')).end();
             return;
         }
         let cleanToken = token.substr(7)
@@ -148,15 +148,15 @@ module.exports = {
                     .then(result=>{
                         rslt.gold -=200;
                         rslt.save();
-                        res.status(200).json({message:'Champion upgraded'})
+                        res.status(200).json({message:'Champion upgraded'}).end();
                         return;
                     })
                     .catch(err=>{
-                        res.status(500).send(new errorModel(500,'Error occured: '+err))
+                        res.status(500).send(new errorModel(500,'Error occured: '+err)).end();
                         return;
                     })
                 } else {
-                    res.status(200).send(new errorModel(200,'You do not have enough gold!'))
+                    res.status(200).send(new errorModel(200,'You do not have enough gold!')).end();
                     return;
                 }
             })
@@ -171,7 +171,7 @@ module.exports = {
                         res.status(200).json({message:'Champion upgraded'}).end()                        
                     )
                     .catch(err=>{
-                        res.status(500).send(new errorModel(500,'Error occured: '+err))
+                        res.status(500).send(new errorModel(500,'Error occured: '+err)).end();
                         return
                     })
                 } else if(result.quality =='Silver'){
@@ -181,7 +181,7 @@ module.exports = {
                         res.status(200).json({message:'Champion upgraded'}).end()                        
                     )
                     .catch(err=>{
-                        res.status(500).send(new errorModel(500,'Error occured: '+err))
+                        res.status(500).send(new errorModel(500,'Error occured: '+err)).end();
                         return
                     })
                 } else if(result.quality =='Gold'){
@@ -191,11 +191,11 @@ module.exports = {
                         res.status(200).json({message:'Champion upgraded'}).end()                        
                     )
                     .catch(err=>{
-                        res.status(500).send(new errorModel(500,'Error occured: '+err))
+                        res.status(500).send(new errorModel(500,'Error occured: '+err)).end();
                         return
                     })
                 } else {
-                    res.status(200).send(new errorModel(200,'Calm down, champion has highest quality already!'))
+                    res.status(200).send(new errorModel(200,'Calm down, champion has highest quality already!')).end();
                     return;
                 }
             })

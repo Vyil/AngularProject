@@ -24,7 +24,7 @@ module.exports = {
         )
         .then(res.status(200).send(new errorModel(200,"created message: "+req.body.content)))
         .catch(err=>{
-            res.status(500).send(new errorModel(500,'Something went wrong: '+err))
+            res.status(500).send(new errorModel(500,'Something went wrong: '+err)).end();
         })
     },
 
@@ -45,19 +45,19 @@ module.exports = {
                 .then(rcpnt=>{
                     if(result.recipient.toString() == rcpnt._id.toString()){
                         result.remove()
-                        res.status(200).send(new errorModel(200, 'Removed message: '+result))
+                        res.status(200).send(new errorModel(200, 'Removed message: '+result)).end();
                         return;
                     } else if(result.author == cleanedid){
                         result.remove()
-                        res.status(200).send(new errorModel(200, 'Removed message: '+result))
+                        res.status(200).send(new errorModel(200, 'Removed message: '+result)).end();
                         return;
                     } else{
-                        res.status(401).send(new errorModel(401, 'Not authorized, no valid token'))
+                        res.status(401).send(new errorModel(401, 'Not authorized, no valid token')).end();
                         return;
                     }
                 })
                 .catch(err=>{
-                    res.status(500).json(err)
+                    res.status(500).json(err).end();
                     return;
                 })
             } else {
@@ -66,7 +66,7 @@ module.exports = {
                    
         })
         .catch(err=>{
-            res.status(500).send(new errorModel(500,'Error occured(User not authorized to remove this message): '+err))
+            res.status(500).send(new errorModel(500,'Error occured(User not authorized to remove this message): '+err)).end();
         })
     },
 
@@ -88,24 +88,24 @@ module.exports = {
                 Message.find({recipient:rslt._id})
                 .then(result=>{
                     if(result){
-                        res.status(200).json(result).end()
+                        res.status(200).json(result).end().end();
                     } else {
-                        res.status(404).send(new errorModel(404,'Id not found')).end()
+                        res.status(404).send(new errorModel(404,'Id not found')).end().end();
                     }
                 })
             })        
             .catch(err=>{
-                res.status(500).send(new errorModel(500,'Error occured: '+err)).end()
+                res.status(500).send(new errorModel(500,'Error occured: '+err)).end().end();
             })
         } else {
             console.log('query param')
             Message.find({recipient:queryParam})
             .then(result=>{
-                res.status(200).json(result)
+                res.status(200).json(result).end();
                 return;
             })
             .catch(err=>{
-                res.status(500).send(new errorModel(500,'Error occured (no results for given ID?): '+err))
+                res.status(500).send(new errorModel(500,'Error occured (no results for given ID?): '+err)).end();
                 return;
             })
         }        
