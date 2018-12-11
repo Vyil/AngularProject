@@ -13,15 +13,20 @@
 
 <div *ngIf="messages">
     <h3>Messages:</h3>
-    <ul>
-      <li *ngFor="let message of messages">
-        <p>{{message.content}}</p>
-        <p>Written by: {{message.authorName}}</p>
-      </li>
-    </ul>
+    <div *ngFor="let message of messages">
+    <div class="card">
+        <div class="card-header">
+          <p>{{message.content}}</p>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <footer class="blockquote-footer">{{message.authorName}}</footer>
+            <a *ngIf="currentUser == message.author" class="btn">Remove</a>
+          </blockquote>
+        </div>
+      </div>
+    </div>
 </div>
 <div *ngIf="user">
     <a class="myButton" (click)="openDialog()">Send {{user.userName}} a message</a>
 </div>
-
-<!-- <app-message [user]="user"></app-message> -->

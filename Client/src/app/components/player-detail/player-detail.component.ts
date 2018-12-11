@@ -19,17 +19,16 @@ import { MatDialog } from '@angular/material';
 export class PlayerDetailComponent implements OnInit {
 
   user: User;
-  visitingUser: User;
-  author: string;
   champions: Champion[];
+  currentUser: String;
   @Input() messages: Message[];
 
   constructor(private dialog: MatDialog,
               private route: ActivatedRoute,
               private userService: UserService,
               private champService: ChampionService,
-              private messageService:MessageService,
-              private router: Router) { }
+              private messageService:MessageService
+              ) { }
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('_id'); 
@@ -41,6 +40,8 @@ export class PlayerDetailComponent implements OnInit {
 
     //Get user's messages
     this.getUserMessages(id);
+
+    this.getCurrentUser();
   }
   
 
@@ -73,8 +74,8 @@ export class PlayerDetailComponent implements OnInit {
     });
   }
 
-  getAuthor(id:string){
-    this.router.navigate(['/players/'+id])
+  getCurrentUser(){
+    this.userService.getByName().subscribe(
+      res=>this.currentUser=res._id)
   }
-
 }
