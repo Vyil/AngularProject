@@ -1,9 +1,13 @@
 <p>REGISTER</p>
 
-<form (ngSubmit)="register()" #registerForm="ngForm">
+<form (ngSubmit)="register()" #registerForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
   <div class="form-group">
     <label for="firstName">FirstName</label>
-    <input type="text" class="form-control" id="firstName" placeholder="firstName" [(ngModel)]="user.firstName" name="firstName">
+    <input type="text" class="form-control" placeholder="firstName" [(ngModel)]="user.firstName" name="firstName" #firstName="ngModel" required>
+    <div *ngIf= "firstName.invalid && (firstName.dirty || firstName.touched)"  class="alert alert-danger">
+        <span>Firstname is required</span>
+    </div>
+    
   </div>
   <div class="form-group">
     <label for="lastName">LastName</label>
@@ -17,5 +21,6 @@
     <label for="password">Password</label>
     <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="user.password" name="password">
   </div>
-  <button class="btn btn-primary" type="submit">Register</button>
+  <button class="btn btn-primary" type="submit" [disabled]="!registerForm.form.valid">Register</button>
+  <a *ngIf="!registerForm.form.valid">The form must be valid in order to submit</a>
 </form>

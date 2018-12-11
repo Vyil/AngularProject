@@ -8,7 +8,11 @@
   <ul>
       <li *ngFor="let message of messages">
         <span>{{message.content}}</span>
-        <button (click)="deleteMessage(message._id)">Delete message</button>
+        <button class="btn">
+            <i class="material-icons" (click)="deleteMessage(message._id)">
+                delete
+            </i>
+        </button>            
       </li>
     </ul>
 </div>

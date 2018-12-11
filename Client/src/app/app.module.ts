@@ -19,6 +19,7 @@ import { MatDialogModule,MatButtonModule, MatCheckboxModule } from '@angular/mat
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditdialogComponent } from './components/editdialog/editdialog.component';
 import { MessagedialogComponent } from './components/messagedialog/messagedialog.component';
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MessagedialogComponent } from './components/messagedialog/messagedialog
     MatDialogModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatIconModule
   ],
   entryComponents:[
     EditdialogComponent,
