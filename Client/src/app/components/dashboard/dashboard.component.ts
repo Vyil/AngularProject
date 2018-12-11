@@ -7,6 +7,8 @@ import { Champion } from 'src/app/models/champion';
 import { ChampionService } from 'src/app/services/champion.service';
 import { MatDialog } from '@angular/material';
 import { EditdialogComponent } from '../editdialog/editdialog.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +27,9 @@ messages:Message[];
     private userService:UserService,
     private messageService:MessageService,
     private champService: ChampionService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService:AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -94,7 +98,11 @@ messages:Message[];
   }
 
   deleteAccount(){
-    if(confirm('Are you sure you want to delete the account?'))
-    console.log('delete acc toggled')
+    if(confirm('Are you sure you want to delete the account?')){
+      this.userService.deleteUser(this.user._id).subscribe(res=>{
+        this.authService.logOutUser();
+        this.router.navigate(['/home'])
+      });
+    }
   }
 }

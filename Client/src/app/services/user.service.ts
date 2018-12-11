@@ -41,4 +41,12 @@ export class UserService {
       }
     });
   }
+
+  deleteUser(id:string){
+    return this.http.delete<User>(this.URL+'/'+id,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    });
+  }
 }
