@@ -19,6 +19,7 @@
 <div *ngIf="messages">
     <h3 class="centerCustom">{{user.userName}}'s Message wall:</h3>
     <div *ngFor="let message of messages">
+        <div class="row col-sm-12 col-md-12 col-lg-12 centerCustom">
     <div class="card centerCustom">
         <div class="card-header">
           <p>{{message.content}}</p>
@@ -35,8 +36,9 @@
           </blockquote>
         </div>
       </div>
+      </div>
     </div>
 </div>
 <div *ngIf="user">
-    <a class="btn btn-default centerCustom" (click)="openDialog()">Write on {{user.userName}}'s wall'</a>
+    <a class="btn centerCustom" (click)="openDialog()">Write on {{user.userName}}'s wall'</a>
 </div>

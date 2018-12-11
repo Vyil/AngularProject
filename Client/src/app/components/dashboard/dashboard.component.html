@@ -24,15 +24,15 @@
   <h4 class="centerCustom">Your champions: </h4>
   <div class="row centerCustom">
     <div *ngFor="let champ of champions">
-      <div class="card col-sm centerCustom" style="width: 18rem;">
+      <div class="card centerCustom border" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">{{champ.name}}</h5>
           <p class="card-text">Level: {{champ.level}}</p>
           <p class="card-text">Quality: {{champ.quality}}</p>
           <div *ngIf="userGold" class="row">
-            <a *ngIf="userGold >=200" class="myButton" (click)="upgradeLevel(champ._id)">Level up!(200G)</a>
+            <a *ngIf="userGold >=200" class="fancy-btn" (click)="upgradeLevel(champ._id)">Level up!(200G)</a>
             <a *ngIf="userGold <200">You need more gold to level up!</a>
-            <a *ngIf="userGold >= 500" class="myButton" (click)="upgradeQuality(champ._id)">Upgrade quality!(500G)</a>
+            <a *ngIf="userGold >= 500" class="fancy-btn" (click)="upgradeQuality(champ._id)">Upgrade quality!(500G)</a>
             <a *ngIf="userGold <500 && !champ.quality == Diamond">You need more gold to increase quality!</a>
             <a *ngIf="champ.quality == Diamond">Your can no longer upgrade your champion</a>
           </div>
@@ -49,7 +49,7 @@
         <div>
           <label>Give your new champion a name!:
             <input [(ngModel)]="newChampion.name">
-            <a class="myButton" (click)="addChampion()">Add new champion</a>
+            <a class="fancy-btn" (click)="addChampion()">Add new champion</a>
           </label>
         </div>
       </div>
@@ -59,8 +59,10 @@
 
   <div *ngIf="messages">
     <h4 class="centerCustom">Your message wall: </h4>
+
     <div *ngFor="let message of messages">
-      <div class="row card centerCustom">
+      <div class="row col-sm-12 col-md-12 col-lg-12 centerCustom">
+      <div class="card">
         <div class="card-header">
           <p>{{message.content}}</p>
         </div>
@@ -76,5 +78,6 @@
           </blockquote>
         </div>
       </div>
+    </div>
     </div>
   </div>
