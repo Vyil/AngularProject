@@ -9,6 +9,10 @@ module.exports = {
         console.log('createChampions called');
 
         let token = req.get('Authorization')
+        if (!token) {
+            res.status(401).json(new errorModel(401, 'Not authorized, no valid token')).end();
+            return;
+        }
         let cleanToken = token.substr(7)
         let cleanedid = auth.decodeToken(cleanToken).sub;
 
@@ -218,7 +222,7 @@ module.exports = {
                 result.remove()
                 .then(res.status(200).json({mesage:'Champion removed'}).end())
             } else {
-                res.status(409).send(new errorModel(409,'Not authorised to delete this champion').end())
+                res.status(401).send(new errorModel(401,'Not authorised to delete this champion').end())
             }
         })
         .catch(err=>{

@@ -106,15 +106,7 @@ module.exports = {
         let idUrl = req.params.id;
         let username = req.body.userName;
 
-        if (req.body.gold) {
-            res.status(403).send(new errorModel(403, 'You are not allowed to edit gold')).end();
-        }
-
-        User.findOneAndUpdate({
-                _id: idUrl
-            }, {
-                userName: username
-            })
+        User.findOneAndUpdate({_id: idUrl}, {userName: username})
             .then(result => {
                 res.status(200).send(new errorModel(200, 'User updated')).end();
             })
@@ -126,19 +118,25 @@ module.exports = {
     deleteUser(req, res) {
         console.log('deleteUser called');
         let idUrl = req.params.id;
+        let token = req.get('Authorization')
+        let cleanToken = token.substr(7)
+        let cleanedid = auth.decodeToken(cleanToken).sub;
 
         User.findOne({
                 _id: idUrl
             })
             .then(result => {
-                result.remove()
-                    .then(
-                        res.status(200).send(new errorModel(200, 'User with ID: ' + idUrl + ' removed')).end()
-                    )
-                    .catch(err => {
-                        res.status(500).send(new errorModel(500, 'Something went wrong trying to remove the user')).end();
-                    })
-
+                if (result._id == cleanedid) {
+                    result.remove()
+                        .then(
+                            res.status(200).send(new errorModel(200, 'User with ID: ' + idUrl + ' removed')).end()
+                        )
+                        .catch(err => {
+                            res.status(500).send(new errorModel(500, 'Something went wrong trying to remove the user')).end();
+                        })
+                } else {
+                    res.status(401).send(new errorModel(401, 'You are not allowed to remove this user')).end()
+                }
             })
             .catch(err => {
                 res.status(500).send(new errorModel(500, 'Something went wrong trying to remove the user')).end();
@@ -149,13 +147,9 @@ module.exports = {
         let token = req.get('Authorization')
         let cleanToken = token.substr(7)
         let cleanedid = auth.decodeToken(cleanToken).sub;
-        User.findOneAndUpdate({
-                _id: cleanedid
-            }, {
-                $inc: {
-                    gold: 200
-                }
-            })
-            .then(res.status(200).json({message:'success!'}).end());
+        User.findOneAndUpdate({_id: cleanedid}, {$inc: {gold: 200}})
+            .then(res.status(200).json({
+                message: 'success!'
+            }).end());
     }
 }
