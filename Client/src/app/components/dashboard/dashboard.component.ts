@@ -128,4 +128,18 @@ messages:Message[];
       });  
     }
   }
+
+  deleteChampion(id:string){
+    if(confirm('Are you sure you want to delete this champion?')){
+      this.champService.deleteChampion(id).subscribe(res=>{
+        this.getChampions();
+        this.snackBar.open('Champion deleted','undo',{
+          duration:3000
+        });
+      });      
+    }
+    this.snackBar.open('Canceled champion delete','undo',{
+      duration:3000
+    });
+  }
 }

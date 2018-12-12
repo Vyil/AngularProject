@@ -36,7 +36,13 @@
     <div *ngFor="let champ of champions">
       <div class="card centerCustom border" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">{{champ.name}}</h5>
+          <h5 class="card-title">{{champ.name}}
+              <button class="btn standardButton">
+                  <i class="material-icons" (click)="deleteChampion(champ._id)">
+                    delete
+                  </i>
+                </button>
+          </h5>
           <p class="card-text">Level: {{champ.level}}</p>
           <p class="card-text">Quality: {{champ.quality}}</p>
           <div *ngIf="user.gold" class="row">

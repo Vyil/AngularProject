@@ -73,4 +73,12 @@ export class ChampionService {
       }
     });
   }
+
+  deleteChampion(id:string):Observable<Champion>{
+    return this.http.delete<Champion>(this.URL+'/'+id,{
+      headers:{
+        'Authorization':'Bearer '+window.localStorage.getItem('APITOKEN')
+      }
+    });
+  }
 }
