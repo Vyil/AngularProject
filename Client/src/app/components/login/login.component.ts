@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   private user:User;
 
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.user = new User();
@@ -20,12 +22,13 @@ export class LoginComponent implements OnInit {
 
   loginUser(): void{
     this.authService.loginUser(this.user).subscribe(response =>{
-      console.log('Succes')
       localStorage.setItem('APITOKEN',response.token);
       location.replace('/dashboard');
     },error=>{
       if(error){
-        console.log(error);
+        this.snackBar.open('Something went wrong, are you sure your username/password is correct?','Undo',{
+          duration:5000
+        });
       }
   })
 }

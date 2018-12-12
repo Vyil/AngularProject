@@ -24,7 +24,7 @@
   <div *ngIf="riddle">
     <div class="row">
     <label>{{riddle.question}}</label>
-    <input type="text" name="answer" [(ngModel)]="riddle.guess">
+    <input type="text" name="answer" [(ngModel)]="riddle.guess" id="riddlebox">
     <a class="btn fancy-btn"(click)="checkRiddleAnswer()">Check answer</a>
   </div>
   </div>

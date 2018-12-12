@@ -16,7 +16,8 @@ const routes: Routes = [
   {path: 'register',component: RegisterComponent},
   {path: 'dashboard',component: DashboardComponent, canActivate:[AuthGuard]},
   {path: 'players',component: PlayerlistComponent},
-  {path:'players/:_id',component:PlayerDetailComponent,canActivate:[AuthGuard]}
+  {path:'players/:_id',component:PlayerDetailComponent,canActivate:[AuthGuard]},
+  {path: '' ,redirectTo:'/home',pathMatch:'full'}
 ];
 
 @NgModule({

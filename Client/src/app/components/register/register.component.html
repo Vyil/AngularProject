@@ -1,34 +1,35 @@
+<div class="centerCustom">
 <p>REGISTER</p>
-
 <form (ngSubmit)="register()" #registerForm="ngForm" [ngFormOptions]="{updateOn: 'change'}">
   <div class="form-group">
     <label for="firstName">FirstName</label>
-    <input type="text" class="form-control" placeholder="firstName" [(ngModel)]="user.firstName" name="firstName" #firstName="ngModel" required>
+    <input type="text" class="form-control" placeholder="firstName" [(ngModel)]="user.firstName" name="firstName" #firstName="ngModel" required minlength="3">
     <div *ngIf= "firstName.invalid && (firstName.dirty || firstName.touched)"  class="alert alert-danger">
-        <span>Firstname is required</span>
+        <span>Firstname is required and should be atleast 3 characters</span>
     </div>    
   </div>
   <div class="form-group">
     <label for="lastName">LastName</label>
-    <input type="text" class="form-control" placeholder="lastName" [(ngModel)]="user.lastName" name="lastName" #lastName="ngModel" required>
+    <input type="text" class="form-control" placeholder="lastName" [(ngModel)]="user.lastName" name="lastName" #lastName="ngModel" required minlength="3">
     <div *ngIf= "lastName.invalid && (lastName.dirty || lastName.touched)"  class="alert alert-danger">
-        <span>Lastname is required</span>
+        <span>Lastname is required and should be atleast 3 characters</span>
     </div> 
   </div>
   <div class="form-group">
     <label for="userName">Username</label>
-    <input type="text" class="form-control" placeholder="Username" [(ngModel)]="user.userName" name="userName" #userName="ngModel" required>
+    <input type="text" class="form-control" placeholder="Username" [(ngModel)]="user.userName" name="userName" #userName="ngModel" required minlength="3">
     <div *ngIf= "userName.invalid && (userName.dirty || userName.touched)"  class="alert alert-danger">
-        <span>Username is required</span>
+        <span>Username is required and should be atleast 3 characters</span>
     </div> 
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" class="form-control" placeholder="Password" [(ngModel)]="user.password" name="password" #password="ngModel" required>
+    <input type="password" class="form-control" placeholder="Password" [(ngModel)]="user.password" name="password" #password="ngModel" required minlength="3">
     <div *ngIf= "password.invalid && (password.dirty || password.touched)"  class="alert alert-danger">
-        <span>Password is required</span>
+        <span>Password is required and should be atleast 3 characters</span>
     </div> 
   </div>
   <button class="btn" type="submit" [disabled]="!registerForm.form.valid">Register</button>
   <a *ngIf="!registerForm.form.valid">The form must be valid in order to submit</a>
 </form>
+</div>

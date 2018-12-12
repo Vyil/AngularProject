@@ -171,7 +171,12 @@ module.exports = {
                     result.quality = 'Silver'
                     result.save()
                     .then(
-                        res.status(200).json({message:'Champion upgraded'}).end()                        
+                        User.findOne({_id:cleanedid})
+                        .then(rslt=>{
+                            rslt.gold -=500;
+                            rslt.save();
+                            res.status(200).json({message:'Champion upgraded'}).end() 
+                        })                                               
                     )
                     .catch(err=>{
                         res.status(500).send(new errorModel(500,'Error occured: '+err)).end();
@@ -181,7 +186,12 @@ module.exports = {
                     result.quality = 'Gold'
                     result.save()
                     .then(
-                        res.status(200).json({message:'Champion upgraded'}).end()                        
+                        User.findOne({_id:cleanedid})
+                        .then(rslt=>{
+                            rslt.gold -=500;
+                            rslt.save();
+                            res.status(200).json({message:'Champion upgraded'}).end() 
+                        })                       
                     )
                     .catch(err=>{
                         res.status(500).send(new errorModel(500,'Error occured: '+err)).end();
@@ -191,7 +201,12 @@ module.exports = {
                     result.quality = 'Diamond'
                     result.save()
                     .then(
-                        res.status(200).json({message:'Champion upgraded'}).end()                        
+                        User.findOne({_id:cleanedid})
+                        .then(rslt=>{
+                            rslt.gold -=500;
+                            rslt.save();
+                            res.status(200).json({message:'Champion upgraded'}).end() 
+                        })                          
                     )
                     .catch(err=>{
                         res.status(500).send(new errorModel(500,'Error occured: '+err)).end();
