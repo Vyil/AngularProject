@@ -4,15 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --reporter spec --exit"
   },
   "author": "Djim",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "jwt-simple": "^0.5.5",
+    "mocha": "^5.2.0",
     "moment": "^2.22.2",
     "mongoose": "^5.3.14"
   }
