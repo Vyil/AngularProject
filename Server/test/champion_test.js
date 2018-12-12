@@ -2,6 +2,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../server');
 const Champion = require('../models/champion');
+const User = require('../models/user');
 const Assert = require('assert');
 
 chai.should();
@@ -13,25 +14,27 @@ describe('Champion tests', function () {
     this.timeout(5000);
 
     let testChamp;
-    beforeEach((done) => {
-        Champion.findOne({
-                name: 'testChampion'
+    let user;
+    before((done) => {
+        User.findOne({
+                userName: 'Vyil'
             })
-            .then(result => {
-                if (!result) {
-                    testChamp = new Champion({
-                        name: 'testChampion',
-                        level: 1,
-                        quality: 'Bronze',
-                        owner: '5c07f008986a2836d4bf7f2c'
+            .then(rslt => {
+                Champion.findOne({
+                        name: 'testChampion'
                     })
-                    newChamp.save(() => {
+                    .then(result => {
+                        testChamp = new Champion({
+                            name: 'testChampion',
+                            level: 1,
+                            quality: 'Bronze',
+                            owner: rslt
+                        })
+                        testChamp.save();
                         done();
+
                     })
-                    done();
-                }
             })
-            .catch(done())
     });
 
     it('can get a specific champion', (done) => {
@@ -52,6 +55,33 @@ describe('Champion tests', function () {
                     });
             })
 
+    });
+
+    it('can get all champions', (done) => {
+        chai.request(server)
+            .get('/api/champion/')
+            .set('Authorization', authToken)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                done();
+            });
+    });
+
+    it('can delete a champion', (done) => {
+        Champion.findOne({
+                name: 'testChampion'
+            })
+            .then(result => {
+                chai.request(server)
+                    .delete('/api/champion/' + result._id)
+                    .set('Authorization', authToken)
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+            })
     });
 
 });

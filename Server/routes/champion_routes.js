@@ -8,5 +8,6 @@ router.post('/champion', championController.createChampion);
 router.get('/champion/:id?',championController.getChampion);
 router.get('/champion/user/:id?',championController.getPlayerChampions);
 router.put('/champion/:id',championController.upgradeChampion);
+router.delete('/champion/:id',championController.deleteChampion);
 
 module.exports = router;

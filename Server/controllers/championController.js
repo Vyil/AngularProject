@@ -130,7 +130,6 @@ module.exports = {
         console.log('Upgrade champion called')
         let idUrl = req.params.id;
         let token = req.get('Authorization')
-        var queryParam = req.query.upgrade;
         var bodyParam = req.body.upgrade;
         if (!token) {
             res.status(401).json(new errorModel(401, 'Not authorized, no valid token')).end();
@@ -200,5 +199,30 @@ module.exports = {
                 }
             })
         }
+    },
+
+    deleteChampion(req,res){
+        console.log('Delete champion called')
+        let idUrl = req.params.id;
+        let token = req.get('Authorization')
+        if (!token) {
+            res.status(401).json(new errorModel(401, 'Not authorized, no valid token')).end();
+            return;
+        }
+        let cleanToken = token.substr(7)
+        let cleanedid = auth.decodeToken(cleanToken).sub;
+
+        Champion.findOne({_id:idUrl})
+        .then( result =>{
+            if(result.owner == cleanedid){
+                result.remove()
+                .then(res.status(200).json({mesage:'Champion removed'}).end())
+            } else {
+                res.status(409).send(new errorModel(409,'Not authorised to delete this champion').end())
+            }
+        })
+        .catch(err=>{
+            res.status(500).send(new errorModel(500,'Error occured: '+err)).end();
+        })
     }
 }
