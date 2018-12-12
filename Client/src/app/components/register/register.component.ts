@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegisterComponent implements OnInit {
   private user:User;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.user = new User();
@@ -21,10 +23,12 @@ export class RegisterComponent implements OnInit {
   register(){
     console.log('Registered: ');
     this.authService.registerUser(this.user).subscribe(response =>{
-      console.log('Succes!');
+      location.replace('/login');
     },error=>{
       if(error){
-        console.log(error);
+        this.snackBar.open('Something went wrong: ','Undo',{
+          duration:5000
+        });
       }
     })
   }
